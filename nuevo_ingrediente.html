@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+        <!--get jquery-->
+      <script src="js/jquery-3.3.1.js"></script>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Nuevo ingrediente</title>
+    </head>
+    <body>
+    
+    <nav class="nav-extended">
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo center">Logo</a>
+      <!--<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="sass.html">Sass</a></li>
+        <li><a href="badges.html">Components</a></li>
+        <li><a href="collapsible.html">JavaScript</a></li>
+      </ul>-->
+    </div>
+    <div class="nav-content">
+    
+      <ul class="tabs tabs-transparent">
+        <li class="tab"><a href="index.html">Platillos</a></li>
+        <li class="tab"><a href="index.html#ingredientes">Ingredientes</a></li>
+      </ul>
+    
+    </div>
+  </nav>
+      
+    <div class="container">
+    <h2>Ingresar nuevo ingrediente</h2>
+        
+        
+    <div class="row">
+    <div class="input-field col m6 s12">
+      <input id="nombre_ingrediente" type="text" class="validate">
+      <label class="active" for="first_name2">Nombre del ingrediente</label>
+    </div>
+    <div class="input-field col m6 s12">
+      <input id="codigo" type="text" class="validate">
+      <label class="active" for="first_name2">Codigo del ingrediente</label>
+    </div>
+    </div>
+    <div class="row">
+    <div class="input-field col m6 s12">
+        <select class="browser-default">
+      <option value="" disabled selected>Elije uno</option>
+      <option value="1">Kg</option>
+      <option value="2">L</option>
+      <option value="3">Gr</option>
+    </select>
+    
+    </div>    
+    </div>
+    </div>
+      <!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+    </body>
+  </html>
