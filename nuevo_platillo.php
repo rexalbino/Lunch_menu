@@ -1,26 +1,6 @@
 <!DOCTYPE html>
-        <script type="text/javascript">
-        $(document).ready(function() {
-            $('#btnAdd').click(function() {
-                var num     = $('.clonedInput').length; // how many "duplicatable" input fields we currently have
-                var newNum  = new Number(num + 1);      // the numeric ID of the new input field being added
- 
-                // create the new element via clone(), and manipulate it's ID using newNum value
-                var newElem = $('#input' + num).clone().attr('id', 'input' + newNum);
- 
-                // manipulate the name/id values of the input inside the new element
-                newElem.children(':first').attr('id', 'name' + newNum).attr('name', 'name' + newNum);
- 
-                // insert the new element after the last "duplicatable" input field
-                $('#input' + num).after(newElem);
- 
-                // enable the "remove" button
-                $('#btnDel').attr('disabled','');
- 
-                // business rule: you can only add 5 names
-                if (newNum == 25)
-                    $('#btnAdd').attr('disabled','disabled');
-            });
+<script src="js/jquery-3.3.1.js"></script>
+       <script>
  
             $('#btnDel').click(function() {
                 var num = $('.clonedInput').length; // how many "duplicatable" input fields we currently have
@@ -36,8 +16,41 @@
  
             $('#btnDel').attr('disabled','disabled');
         });
+        $(document).on('change', '#servicio', function(event) {
+        $('#servicioSelecionado').val($("#servicio option:selected").val());
+        });
+        
     </script>
-    
+    <script type="text/javascript">
+        $(document).ready(function(){
+        var maxField = 10; //Input fields increment limitation
+        var addButton = $('.add_button'); //Add button selector
+        var wrapper = $('.field_wrapper'); //Input field wrapper
+        var fieldHTML = '<div><input type="text" name="field_name[]" value=""/><a href="javascript:void(0);" class="remove_button" title="Remove field">borrar</a></div>'; //New input field html 
+        var x = 1; //Initial field counter is 1
+            $(addButton).click(function(){ //Once add button is clicked
+        if(x < maxField){ //Check maximum number of input fields
+            x++; //Increment field counter
+            $(wrapper).append(fieldHTML); // Add field html
+        }
+        });
+        $(wrapper).on('click', '.remove_button', function(e){ //Once remove button is clicked
+        e.preventDefault();
+        $(this).parent('div').remove(); //Remove field html
+        x--; //Decrement field counter
+            });
+        });
+</script>
+    <?php 
+        require('header.php'); 
+        require('conexion.php');
+        
+        $sql_ingredientes="SELECT `codigo`,`cantidad`,`nombre_ingrediente`,`costo_presentacion`,`costo_unitario`,ingredientes.id_ingredientes,unidad.des_unidad FROM `ingredientes` INNER JOIN unidad ON ingredientes.id_unidad = unidad.id_unidad ORDER BY ingredientes.id_ingredientes ";
+        $resultado = mysqli_query($link,$sql_ingredientes) or die(mysqli_error($link));
+
+        $id_platillo="";
+
+    ?>
     </head>
 
     <body>
@@ -67,19 +80,25 @@
     </div>
     </div>
         <hr color="#f44336" size=3>
-    <div id="input1" class="clonedInput">
+    <div id="input1" name="ingredientes[]">
     <div class="row">
     <div class="input-field col m6 s12">
-        <select class="browser-default">
+        <select class="browser-default" id="ingrediente" name="ingrediente">
       <option value="" disabled selected>Elije uno</option>
-      <option value="1">Test 1</option>
-      <option value="2">Test 2</option>
-      <option value="3">Test 3</option>
+        <?php
+	       while($row = mysqli_fetch_array($resultado)):
+	   ?>
+            
+      <option value="<?php echo $row['id_ingredientes']; ?>"><?php echo $row['nombre_ingrediente']; ?></option>
+            
+        <?php
+				endwhile;
+            ?>    
+            
     </select>
     </div>
     <div class="col m6 s12">
-        <p>Clave de producto:</p>
-        <p>Aqui va la clave del producto</p>
+      <input id="ingre" name="nom_Servicio" >
     </div>
     </div>
     <div class="row">
@@ -123,15 +142,14 @@
         <hr color="#f44336 " size=3>
     </div>
     <div>
-        <input type="button" id="btnAdd" value="add another name" />
-        <input type="button" id="btnDel" value="remove name" />
+        <a href="javascript:void(0);" class="add_button" title="Add field">Añadir</a>
     </div>
     </form> 
     
     <div class="center">
         
-        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-            <i class="material-icons right">Enviar</i>
+        <button class="btn waves-effect waves-light" type="submit" name="action">Enviar
+            <i class="material-icons right">send</i>
         </button>
         
     </div>
@@ -140,5 +158,6 @@
       <!--Import jQuery before materialize.js-->
       
       <script type="text/javascript" src="js/materialize.min.js"></script>
+        
     </body>
   </html>

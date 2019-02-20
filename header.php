@@ -5,7 +5,7 @@
       <!--Import materialize.css-->
       <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
       <!--get jquery-->
-      <script src="js/jquery-3.3.1.js"></script>
+      
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -15,9 +15,9 @@
     <body>
         
          
-        <nav class="nav-extended">
+        <nav class="nav-extended #000000 black">
     <div class="nav-wrapper">
-      <a href="index.php" class="brand-logo center">Logo</a>
+      <a href="index.php" class="brand-logo center"><img src="img/lunchlogo.png"></a>
       <!--<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="sass.html">Sass</a></li>
