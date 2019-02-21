@@ -4,7 +4,7 @@
     require('header.php'); 
     require('conexion.php');
     
-    $sql_ingredientes='SELECT `codigo`,`cantidad`,`nombre_ingrediente`,`costo_presentacion`,`costo_unitario`,unidad.des_unidad FROM `ingredientes` INNER JOIN unidad ON ingredientes.id_unidad = unidad.id_unidad ';
+    $sql_ingredientes='SELECT `codigo`,`cantidad`,`nombre_ingrediente`,`costo_presentacion`,`costo_unitario`,unidad.des_unidad FROM `ingredientes` INNER JOIN unidad ON ingredientes.id_unidad = unidad.id_unidad ORDER BY ingredientes.id_ingredientes DESC ';
     $resultado = mysqli_query($link,$sql_ingredientes) or die(mysqli_error($link));
     
     ?>
