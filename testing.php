@@ -1,8 +1,11 @@
 <?php
     require('header.php'); //llamar header
     require('conexion.php');//llamar concexio a bd
+    $id=$_GET['id'];
     $sql_ingredientes="SELECT `codigo`,`cantidad`,`nombre_ingrediente`,`costo_presentacion`,`costo_unitario`,ingredientes.id_ingredientes,unidad.des_unidad FROM `ingredientes` INNER JOIN unidad ON ingredientes.id_unidad = unidad.id_unidad ORDER BY ingredientes.id_ingredientes ";//SQL de datos para ingredientes
         $resultado = mysqli_query($link,$sql_ingredientes) or die(mysqli_error($link)); //SQL listo
+
+echo $id;
 ?>
 <script>
 b = 0;

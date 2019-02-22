@@ -143,7 +143,7 @@ $(document).ready(function(){
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
  
- <script>
+ <!--<script>
 a = 0;
 function addCancion(){
         a++;
@@ -183,7 +183,7 @@ function addCancion(){
         <div class="col-md-2"><label>Duraci&oacute;n</label></div>
         <div class="col-md-1"><input type="button" class="btn btn-success" id="add_cancion()" onClick="addCancion()" value="+" /></div>
     </div>
-    <!-- El id="canciones" indica que la función de JavaScript dejará aquí el resultado -->
+    <!-- El id="canciones" indica que la función de JavaScript dejará aquí el resultado 
     <div class="row" id="canciones">
     </div>
     </form>
@@ -199,6 +199,13 @@ function addCancion(){
         </form>
     
     </div>
+    <form method="get" action="testing.php" name="test">
+        <input type="text" id="1" name="1">
+    </form>
+    <button class="btn waves-effect waves-light" type="submit" name="action" form="test" >Enviar
+            <i class="material-icons right">send</i>
+    </button> -->
+    <a href="testing.php?id=1">entra</a>
  
 </body>
 </html>

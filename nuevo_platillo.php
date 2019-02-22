@@ -5,6 +5,8 @@
     <?php 
         require('header.php'); 
         require('conexion.php');
+
+        
         
         $sql_ingredientes="SELECT `codigo`,`cantidad`,`nombre_ingrediente`,`costo_presentacion`,`costo_unitario`,ingredientes.id_ingredientes,unidad.des_unidad FROM `ingredientes` INNER JOIN unidad ON ingredientes.id_unidad = unidad.id_unidad ORDER BY ingredientes.id_ingredientes ";
         $resultado = mysqli_query($link,$sql_ingredientes) or die(mysqli_error($link));
@@ -20,20 +22,20 @@
     <div class="container">
     <h2>Ingresar nuevo platillo</h2>
         
-    <form id="platillos" method="post" action="anadir_ingredientes.php">
+    <form id="platillos" method="post" action="datosplatillo.php">
     <div class="row">
     <div class="input-field col m6 s12">
-      <input id="nombreingrediente" name="nombreingrediente" type="text" class="validate">
+      <input id="nombreingrediente" name="nombreingrediente" type="text" class="validate" required>
       <label class="active" for="first_name2">Nombre del platillo</label>
     </div>
     </div>
     <div class="row">
     <div class="input-field col s6">
-      <input id="porciones" name="porciones" type="text" class="validate">
+      <input id="porciones" name="porciones" type="number" class="validate" required>
       <label class="active" for="first_name2">Porciones</label>
     </div>
     <div class="input-field col s5">
-      <input id="tiempopreparacion" name="tiempopreparacion" type="number" class="validate">
+      <input id="tiempopreparacion" name="tiempopreparacion" type="number" class="validate" required>
       <label class="active" for="first_name2">Tiempo de preparacion</label>
     </div>
     <div class="input-field col s1">
@@ -41,7 +43,7 @@
     </div>
     <div class="row">
         <div class="input-field col s12">
-          <textarea id="instructivo" name="instructivo" class="materialize-textarea"></textarea>
+          <textarea id="instructivo" name="instructivo" class="materialize-textarea" required></textarea>
           <label for="textarea1">Instrucciones para preparar</label>
         </div>
       </div>

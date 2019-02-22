@@ -1,16 +1,6 @@
-<?php
-
-require('conexion.php');
-require('header.php');
-
-    $id_libre= $_GET['id'];
-    $definir_platillo = "SELECT nombre_platillo from platillo where id_platillo ='$id_libre'";
-    $obtener_platillo = mysqli_query($link,$definir_platillo);
-    $nombredelplatillo = mysqli_fetch_assoc($obtener_platillo);
-
-    
-echo "<div class='container center_align'><h3>Estas trbajando con el platillo ". $nombredelplatillo['nombre_platillo']."</h3></div>" ;
-    
+<?php 
+    require('conexion.php');
+    require('header.php');
 ?>
 <div class="container">
     
