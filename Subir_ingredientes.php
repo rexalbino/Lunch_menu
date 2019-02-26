@@ -52,7 +52,12 @@
     $sql="INSERT INTO `ingredientes` (`id_ingredientes`, `codigo`, `cantidad`, `id_unidad`, `nombre_ingrediente`, `costo_presentacion`, `costo_unitario`) VALUES (NULL, '$cingrediente', '$caningrediente', '$uingrediente', '$ningrediente', '$pingrediente', '$puingrediente');";
     if(mysqli_query($link,$sql)){
         echo "Introducido";
-        header('Location: index.php');
+        //header('Location: index.php');
+        ?>
+        <script type="text/javascript">
+            window.location="index.php";
+        </script>
+    <?php
     }else{
         echo "Aqlgo salio mal";
     }

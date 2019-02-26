@@ -3,9 +3,13 @@
   <?php 
     require('header.php'); 
     require('conexion.php');
+
+    $sql_platillos="SELECT `id_platillo`,`nombre_platillo` FROM `platillo` ";
+    $resultado_platillo = mysqli_query($link,$sql_platillos) or die(mysqli_error($link));
     
     $sql_ingredientes='SELECT `codigo`,`cantidad`,`nombre_ingrediente`,`costo_presentacion`,`costo_unitario`,unidad.des_unidad FROM `ingredientes` INNER JOIN unidad ON ingredientes.id_unidad = unidad.id_unidad ORDER BY ingredientes.id_ingredientes DESC ';
     $resultado = mysqli_query($link,$sql_ingredientes) or die(mysqli_error($link));
+    
     
     ?>
     <script>
@@ -33,35 +37,29 @@
         <thead>
           <tr>
               <th>Nombre de Platillo</th>
-              <th>Numero de ingredientes</th>
+              <th>Escandallo</th>
               <th>Ficha tecnica</th>
+              <th>Añadir ingredientes</th>
               <th>Editar</th>
               <th>Borrar</th>
           </tr>
         </thead>
 
         <tbody>
+            <?php
+			while($row2 = mysqli_fetch_array($resultado_platillo)):
+			?>
           <tr>
-            <td>Test 1</td>
-            <td>5</td>
-            <td><a href="#"><i class="material-icons">developer_board</i></a></td>
+            <td><?php echo $row2['nombre_platillo']; ?></td>
+            <td><a href="escandallo.php?id=<?php echo $row2['id_platillo'] ?>"><i class="material-icons center-align">developer_board</i></a></td>
+            <td><a href="ficha_tecnica.php?id=<?php echo $row2['id_platillo']  ?>"><i class="material-icons center-align">import_contacts</i></a></td>
+            <td><a href="anadir_ingredientes.php?id=<?php echo $row2['id_platillo']  ?>"><i class="material-icons center-align">forward</i></a></td>
             <td><a href="#"><i class="material-icons">edit</i></a></td>
             <td><a href="#"><i class="material-icons">delete</i></a></td>
           </tr>
-          <tr>
-            <td>Test 2</td>
-            <td>5</td>
-            <td><a href="#"><i class="material-icons">developer_board</i></a></td>
-            <td><a href="#"><i class="material-icons">edit</i></a></td>
-            <td><a href="#"><i class="material-icons">delete</i></a></td>
-          </tr>
-          <tr>
-            <td>Test 3</td>
-            <td>5</td>
-            <td><a href="#"><i class="material-icons">developer_board</i></a></td>
-            <td><a href="#"><i class="material-icons">edit</i></a></td>
-            <td><a href="#"><i class="material-icons">delete</i></a></td>
-          </tr>
+            <?php
+				endwhile;
+            ?>
         </tbody>
       </table> 
         
