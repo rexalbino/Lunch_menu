@@ -62,9 +62,17 @@
     </div>    
     </form> 
     <div class="container center-align">
-        <button class="btn waves-effect waves-light" type="submit" name="action" form="ingredientes" value="choose">Enviar
-            <i class="material-icons right">send</i>
-        </button>    
+        <div class="row">
+            <div class="col s6">
+                <button class="btn-large waves-effect waves-light" type="submit" name="action" form="ingredientes" value="choose">Subir ingrediente
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+            <div class="col s6">
+                <a href="index.php#ingredientes" class="waves-effect waves-light btn-large red accent-4"><i class="material-icons right">close</i>Cancelar</a>
+            </div>
+        </div>
+            
     </div>
     </div>
       <!--Import jQuery before materialize.js-->

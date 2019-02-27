@@ -28,7 +28,7 @@
     <div class="nav-content">
     
       <ul class="tabs tabs-transparent">
-        <li class="tab"><a class="active" href="index.php#platillos">Platillos</a></li>
+        <li class="tab"><a href="index.php#platillos">Platillos</a></li>
         <li class="tab"><a  href="index.php#ingredientes">Ingredientes</a></li>
       </ul>
     

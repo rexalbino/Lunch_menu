@@ -18,13 +18,21 @@
     if(mysqli_query($link,$sql)){
         echo "Introducido";
         //header("Location: anadir_ingredientes.php?id=$id_platillo");
+        $sql_neto="SELECT `costo_neto` FROM `platillo` WHERE `id_platillo`='$id_platillo' ";
+        $obtener_neto = mysqli_query($link,$sql_neto);
+        $neton =mysqli_fetch_assoc($obtener_neto);
+        
+        $valor_neto= $neton['costo_neto'];
+        
+        $neto= (FLOAT)$valor_neto + (FLOAT)$id_costeneto;
+        
+        echo $valor_neto. " + ".$id_costeneto." = ".$neto;
+        $sql_actualizar_costo_neto="UPDATE `platillo` SET `costo_neto` = '$neto' WHERE `platillo`.`id_platillo` = '$id_platillo';";
+        mysqli_query($link,$sql_actualizar_costo_neto);
         ?>
-        
-        
-
-    <script type="text/javascript">
+    <!--<script type="text/javascript">
             window.location="anadir_ingredientes.php?id=$id_platillo";
-        </script>
+        </script>-->
     <?php
         
     }else{

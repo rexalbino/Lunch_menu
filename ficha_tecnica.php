@@ -82,6 +82,24 @@
           </tr>
         </tbody>
       </table>
+    <br/>
+    <br/>
+    <br/>
+    <div class="row center-align">
+        <div class="col s6">
+            <a class="waves-effect waves-light btn-large blue lighten-2" onClick="imprimir();"><i class="material-icons right">local_printshop</i>Imprimir</a>
+        </div>
+        <div class="col s6">
+            <a href="index.php" class="waves-effect waves-light btn-large black center-align"><i class="material-icons right">keyboard_return</i>Volver a inicio</a>
+        </div>
+    </div>
     
     
 </div>
+<script>
+    function imprimir(){
+      if (parseInt(navigator.appVersion)>4)
+        window.print();
+    }
+</script>
+</body>

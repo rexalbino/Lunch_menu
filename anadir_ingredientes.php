@@ -116,13 +116,18 @@ echo "<div class='container center_align'><h3>Estas trbajando con el platillo ".
     </div>
 </div>
 </form>
-<div class="row">
-    <div class="col s12">
     <div class="container center-align">
-        <button class="btn waves-effect waves-light" type="submit" name="action" form="envio_ingre" value="choose">Añadir otro ingrediente
+<div class="row">
+    <div class="col s6">
+    
+        <button class="btn-large waves-effect waves-light" type="submit" name="action" form="envio_ingre" value="choose">Añadir otro ingrediente
             <i class="material-icons right">send</i>
         </button>    
     </div>
+    <div class="col s6">
+        <a href="index.php" class="waves-effect waves-light btn-large red accent-4"><i class="material-icons right">close</i>Cancelar</a>
+    </div>
+    
     </div>
 </div>
 </div>

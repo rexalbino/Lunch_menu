@@ -10,7 +10,7 @@
     $get_dato_platillo = mysqli_query($link,$sql_datosplatillo);
     $platillo = mysqli_fetch_assoc($get_dato_platillo);
 
-    $sql_dato_ingre="SELECT `id_ingrediente`,`id_platillo`,`peso_bruto`,`peso_neto`,`merma`,`coste_unitario`,`coste_neto`,`pax_pesos`,ingredientes.codigo,ingredientes.nombre_ingrediente,unidad.des_unidad FROM `platillo_ingrediente` INNER JOIN ingredientes ON platillo_ingrediente.id_ingrediente = ingredientes.id_ingredientes INNER JOIN unidad ON unidad.id_unidad = ingredientes.id_unidad WHERE id_platillo = '$id' ";
+    $sql_dato_ingre="SELECT `id_ingrediente`,platillo.id_platillo,`peso_bruto`,`peso_neto`,`merma`,`coste_unitario`,`coste_neto`,`pax_pesos`,ingredientes.codigo,ingredientes.nombre_ingrediente,unidad.des_unidad,platillo.costo_neto FROM `platillo_ingrediente` INNER JOIN ingredientes ON platillo_ingrediente.id_ingrediente = ingredientes.id_ingredientes INNER JOIN platillo ON platillo_ingrediente.id_platillo = platillo.id_platillo INNER JOIN unidad ON unidad.id_unidad = ingredientes.id_unidad WHERE platillo_ingrediente.id_platillo = '$id' ";
     $get_dato_ingre = mysqli_query($link,$sql_dato_ingre);
 
 ?>
@@ -61,12 +61,18 @@
             <td><?php echo $row2['coste_unitario']; ?></td>
             <td><?php echo $row2['coste_neto']; ?></td>
             <td><?php echo $row2['pax_pesos']; ?></td>
-            <td><?php echo "---" ?></td>
+            <td><?php echo (FLOAT)$row2['coste_neto'] / (FLOAT)$row2['costo_neto']; ?></td>
             <?php
 				endwhile;
             ?>
           </tr>
         </tbody>
       </table>
+    <br/>
+    <div class="row center-align">
+        <div class="col s12">
+        <a href="index.php#ingredientes" class="waves-effect waves-light btn-large black center-align"><i class="material-icons right">keyboard_return</i>Volver a inicio</a>
+        </div>
+    </div>
     
 </div>
