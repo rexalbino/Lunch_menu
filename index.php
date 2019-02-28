@@ -7,7 +7,7 @@
     $sql_platillos="SELECT `id_platillo`,`nombre_platillo` FROM `platillo` ";
     $resultado_platillo = mysqli_query($link,$sql_platillos) or die(mysqli_error($link));
     
-    $sql_ingredientes='SELECT `codigo`,`cantidad`,`nombre_ingrediente`,`costo_presentacion`,`costo_unitario`,unidad.des_unidad FROM `ingredientes` INNER JOIN unidad ON ingredientes.id_unidad = unidad.id_unidad ORDER BY ingredientes.id_ingredientes DESC ';
+    $sql_ingredientes='SELECT `id_ingredientes`,`codigo`,`cantidad`,`nombre_ingrediente`,`costo_presentacion`,`costo_unitario`,unidad.des_unidad FROM `ingredientes` INNER JOIN unidad ON ingredientes.id_unidad = unidad.id_unidad ORDER BY ingredientes.id_ingredientes DESC ';
     $resultado = mysqli_query($link,$sql_ingredientes) or die(mysqli_error($link));
     
     
@@ -27,6 +27,7 @@
         <!--platillos-->
     <div id="platillos" class="col s12">
         </br>
+        <h2>Platillos</h2>
         </br>
         </br>
        <div class="center"><a href="nuevo_platillo.php" class="center waves-effect waves-light btn">A&ntilde;adir nuevo platillo</a></div>
@@ -54,8 +55,8 @@
             <td><a href="escandallo.php?id=<?php echo $row2['id_platillo'] ?>"><i class="material-icons center-align">developer_board</i></a></td>
             <td><a href="ficha_tecnica.php?id=<?php echo $row2['id_platillo']  ?>"><i class="material-icons center-align">import_contacts</i></a></td>
             <td><a href="anadir_ingredientes.php?id=<?php echo $row2['id_platillo']  ?>"><i class="material-icons center-align">forward</i></a></td>
-            <td><a href="#"><i class="material-icons">edit</i></a></td>
-            <td><a href="#"><i class="material-icons">delete</i></a></td>
+            <td><a href="actualizar_platillos.php?id=<?php echo $row2['id_platillo'] ?>"><i class="material-icons">edit</i></a></td>
+            <td><a href="eliminar.php?id_plat=<?php echo $row2['id_platillo'] ?>"><i class="material-icons">delete</i></a></td>
           </tr>
             <?php
 				endwhile;
@@ -101,8 +102,8 @@
             <td><?php echo $row['des_unidad']; ?></td>
             <td><?php echo $row['costo_unitario']; ?></td>
             <td><?php echo $row['costo_presentacion']; ?></td>
-            <td><a href="#"><i class="material-icons">edit</i></a></td>
-            <td><a href="#"><i class="material-icons">delete</i></a></td>
+            <td><a href="actualizar_ingre.php?id=<?php echo $row['id_ingredientes']; ?>"><i class="material-icons">edit</i></a></td>
+            <td><a href="eliminar_ingre.php?id_ingre=<?php echo $row['id_ingredientes']; ?>"><i class="material-icons">delete</i></a></td>
           </tr>
         </tbody>
            <?php
