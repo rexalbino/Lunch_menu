@@ -79,7 +79,7 @@
                 </button>
             </div>
             <div class="col s6">
-                <a href="index.php#ingredientes" class="waves-effect waves-light btn-large red accent-4"><i class="material-icons right">close</i>Cancelar</a>
+                <a href="ingredientes.php" class="waves-effect waves-light btn-large red accent-4"><i class="material-icons right">close</i>Cancelar</a>
             </div>
         </div>
             

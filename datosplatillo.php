@@ -20,7 +20,7 @@
         $id_libre=$el_id['MAX(id_platillo)'];
         //header("Location: anadir_ingredientes.php?id=$id_libre");?>
         <script type="text/javascript">
-            window.location="anadir_ingredientes.php?id=$id_libre";
+            window.location="anadir_ingredientes.php?id=<?php echo $id_libre?>";
         </script>
 <?php
     }else{

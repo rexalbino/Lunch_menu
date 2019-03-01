@@ -9,15 +9,25 @@
         echo "Eliminado";
         ?>
 
-        <!--<script type="text/javascript">
+        <script type="text/javascript">
             window.location="index.php";
-        </script>-->
+        </script>
 
         <?php
     }else{
         echo "No eliminado";
         echo $id_platillo;
-        echo "<br/>Error deleting record: " . mysqli_error($link);
+         echo "<br/>Se produjo el error: " . mysqli_error($link)."Volveremos a la pantalla de platillos en 10 segundos";
+        ?>
+        <script type="text/javascript">
+            setTimeout(function() {
+                window.location.href = "index.php";
+                }, 10000);
+        </script>
+    <div style="aling-items: center;  justify-content: center">
+
+    </div>
+<?php
     }
 ?>
     

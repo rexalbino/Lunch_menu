@@ -55,7 +55,7 @@
         //header('Location: index.php');
         ?>
         <script type="text/javascript">
-            window.location="index.php";
+            window.location="ingredientes.php";
         </script>
     <?php
     }else{

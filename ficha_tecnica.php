@@ -12,6 +12,7 @@
     $sql_ingredientes="SELECT unidad.des_unidad, ingredientes.codigo, ingredientes.cantidad, ingredientes.nombre_ingrediente,`id_relacion`,`peso_bruto` FROM `platillo_ingrediente` INNER JOIN ingredientes ON ingredientes.id_ingredientes = id_ingrediente INNER JOIN unidad ON unidad.id_unidad = ingredientes.id_unidad WHERE id_platillo = '$id' ";
     $resultado = mysqli_query($link,$sql_ingredientes) or die(mysqli_error($link));
 ?>
+<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 <div class="container">
 <table class="centered">
         <thead>

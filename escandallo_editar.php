@@ -3,10 +3,11 @@
 require('conexion.php');
 require('header.php');
 
-    $id_libre= $_GET['id'];
+    $id_libre= $_GET['id_platillo'];
+    $id_relacion= $_GET['id_rel'];
     
-    if(isset($_GET['id_ingrediente'])){
-        $id_ingrediente =$_GET['id_ingrediente'];
+    if(isset($_GET['id_ingre'])){
+        $id_ingrediente =$_GET['id_ingre'];
         $sql_get_ingredientes = "SELECT `id_ingredientes`,`codigo`,`cantidad`,`nombre_ingrediente`,`costo_presentacion`,`costo_unitario` ,unidad.des_unidad FROM `ingredientes` INNER JOIN unidad ON ingredientes.id_unidad = unidad.id_unidad WHERE `id_ingredientes`='$id_ingrediente' ";
         $get_igredientes = mysqli_query($link,$sql_get_ingredientes);
         $nombreingrediente = mysqli_fetch_assoc($get_igredientes);
@@ -15,6 +16,10 @@ require('header.php');
         echo "Esperando ingrediente";
         $ingre ="0";
     }
+
+        $relacion_datos="SELECT * FROM `platillo_ingrediente` WHERE `id_relacion`='$id_relacion' ";
+        $get_relacion = mysqli_query($link,$relacion_datos);
+        $datos_relacion = mysqli_fetch_assoc($get_relacion);
     
 
     $definir_platillo = "SELECT nombre_platillo,porciones,id_platillo from platillo where id_platillo ='$id_libre' ";
@@ -22,28 +27,28 @@ require('header.php');
     $nombredelplatillo = mysqli_fetch_assoc($obtener_platillo);
 
     
-echo "<div class='container center_align'><h3>Estas trbajando con el platillo ". $nombredelplatillo['nombre_platillo']."</h3></div>" ;
+echo "<div class='container center_align'><h3>Estas trbajando con el platillo <b>". $nombredelplatillo['nombre_platillo']."</b></h3></div>" ;
     
     $sql_ingredientes="SELECT * FROM `ingredientes` ";
     $obtener_ingredientes = mysqli_query($link,$sql_ingredientes);
 ?>
 <div class="container">
     
-<div class="row">
+<!--<div class="row">
    <form id="ingredientes" action="anadir_ingredientes.php" method="get">
     <div class=" col m6 s12">
     <div style="visibility: hidden;">
-        <input type="number" value="<?php echo $id_libre ?>" id="id" name="id">
+        <input type="number" value="<?php //echo $id_libre ?>" id="id" name="id">
     </div> 
     <label>Selecciona el ingrediente</label>
-  <select class="browser-default" id="id_ingrediente" name="id_ingrediente" <?php if($ingre=="1"){ ?> <?php  }else{  ?>required <?php } ?>>
+  <select class="browser-default" id="id_ingrediente" name="id_ingrediente" <?php //if($ingre=="1"){ ?> <?php // }else{  ?>required <?php //} ?>>
     <option value="" disabled selected>Elije un ingrediente</option>
     <?php
-		while($row = mysqli_fetch_array($obtener_ingredientes)):
+		//while($row = mysqli_fetch_array($obtener_ingredientes)):
       ?>
-    <option value="<?php echo $row['id_ingredientes']; ?>"><?php echo $row['nombre_ingrediente']; ?></option>
+    <option value="<?php //echo $row['id_ingredientes']; ?>"><?php //echo $row['nombre_ingrediente']; ?></option>
     <?php
-      endwhile;
+      //endwhile;
     ?>
   </select>
        
@@ -59,30 +64,30 @@ echo "<div class='container center_align'><h3>Estas trbajando con el platillo ".
         </button>
         
     </div>
-    </div>
+    </div>-->
     <?php if($ingre=="1"){ ?>
     <div class="row">
        <div class="col m8 s12">
-          <?php echo "Ingrediente seleccionado <b>".$nombreingrediente['nombre_ingrediente']."</b> con clave <b>".$nombreingrediente['codigo']."</b>"  ?> 
+          <?php echo "<h3>Ingrediente seleccionado <b>".$nombreingrediente['nombre_ingrediente']."</b> con clave <b>".$nombreingrediente['codigo']."</b></h3>"  ?> 
        </div>
         
     </div>
     <?php  } ?>
-    <form id="envio_ingre" name="envio_ingre" method="post" action="subir_relacion_plaxingre.php">
+    <form id="envio_ingre" name="envio_ingre" method="post" action="update_escandillo.php">
 <div class="row">
     <div class="input-field col m3 s6">
-        <input id="bruto" name="bruto" type="number" class="validate" step="any" onkeyup="cant_neto();cost_neto();" required>
+        <input id="bruto" name="bruto" value="<?php echo $datos_relacion['peso_bruto'];  ?>" type="number" class="validate" step="any" onkeyup="cant_neto();cost_neto();pax_pesos();" required>
         <label class="active" for="first_name2">Peso bruto</label>
     </div>
     <div class="col m1 s6">
         <?php if($ingre=="1"){ ?><p><?php echo $nombreingrediente['des_unidad']; ?></p><?php } ?>
     </div>
     <div class="input-field col m4 s12">
-        <input id="merma" name="merma" type="number" class="validate" onkeyup="cant_neto();cost_neto();pax_pesos();" step="any" required>
+        <input id="merma" name="merma" type="number" value="<?php echo $datos_relacion['merma'];  ?>" class="validate" onkeyup="cant_neto();cost_neto();pax_pesos();" step="any" required>
         <label class="active" for="first_name2">Merma</label>
     </div>
     <div class="input-field col m3 s12">
-        <input id="neto" name="neto" type="number" class="validate" step="any" value="0" readoly required>
+        <input id="neto" name="neto" type="number" value="<?php echo $datos_relacion['peso_neto'];  ?>" class="validate" step="any" value="0" readoly required>
         <label class="active" for="first_name2">Peso neto</label>
     </div>
     <div class="col m1 s6">
@@ -95,24 +100,24 @@ echo "<div class='container center_align'><h3>Estas trbajando con el platillo ".
         <label class="active" for="first_name2">Coste unitario bruto</label>
     </div>
     <div class="input-field col m4 s6">
-        <input id="totalneto" name="totalneto" value="0" type="number" class="validate" step="any" required>
+        <input id="totalneto" name="totalneto" value="<?php echo $datos_relacion['coste_neto'];  ?>" type="number" class="validate" step="any" required>
         <label class="active" for="first_name2">Coste total neto</label>
     </div>
     <div class="input-field col m4 s6">
-        <input id="paxpesos" name="paxpesos" value="0" readonly type="text" class="validate" step="any" required>
+        <input id="paxpesos" name="paxpesos" value="<?php echo $datos_relacion['pax_pesos'];  ?>" readonly type="text" class="validate" step="any" required>
         <label class="active" for="first_name2">Precio por pax pesos</label>
     </div>
     
 </div>
 <div class="row" style="visibility: hidden;">
     <div class="col m4 s12" >
-            <input type="number" value="<?php echo  $nombredelplatillo['porciones']; ?>" id="porciones" name="porciones" disabled>
+            <input type="number" value="<?php echo  $id_relacion ?>" id="relacion" name="relacion" readonly>
         </div>
     <div class="col m4 s12" >
-        <input type="number" id="id_recetaa" name="id_recetaa" value="<?php echo  $nombredelplatillo['id_platillo']; ?>" readonly>
+        <input type="number" id="anteriorneto" name="anteriorneto" value="<?php echo  $datos_relacion['coste_neto']; ?>" readonly>
     </div>
-    <div class="col m4 s12" >
-        <input type="number" id="id_ingreeee" name="id_ingreee" value="<?php echo  $nombreingrediente['id_ingredientes']; ?>" readonly>
+   <div class="col m4 s12" >
+        <input type="number" id="id_recetaa" name="id_recetaa" value="<?php echo  $nombredelplatillo['id_platillo']; ?>" readonly>
     </div>
 </div>
 </form>
@@ -120,7 +125,7 @@ echo "<div class='container center_align'><h3>Estas trbajando con el platillo ".
 <div class="row">
     <div class="col s6">
     
-        <button class="btn-large waves-effect waves-light" type="submit" name="action" form="envio_ingre" value="choose">Añadir otro ingrediente
+        <button class="btn-large waves-effect waves-light" type="submit" name="action" form="envio_ingre" value="choose" disabled>Editar
             <i class="material-icons right">send</i>
         </button>    
     </div>

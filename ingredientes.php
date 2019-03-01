@@ -1,6 +1,8 @@
  <!DOCTYPE html>
 <script src="js/jquery-3.3.1.js"></script>
   <?php 
+
+    $dondeestoy= "1";
     require('header.php'); 
     require('conexion.php');
 
@@ -12,11 +14,7 @@
     
     
     ?>
-    <script>
-        $(document).ready(function(){
-            $('ul.tabs').tabs();
-        });
-        </script>
+    
     <div class="container">
   <!--<ul class="sidenav" id="mobile-demo">
     <li><a href="sass.html">Sass</a></li>
@@ -24,8 +22,8 @@
     <li><a href="collapsible.html">JavaScript</a></li>
   </ul>-->
         
-        <!--platillos-->
-    <div  class="col s12">
+        <!--platillos
+    <div id="platillos" class="col s12">
         </br>
         <h2>Platillos</h2>
         </br>
@@ -48,25 +46,25 @@
 
         <tbody>
             <?php
-			while($row2 = mysqli_fetch_array($resultado_platillo)):
+			//while($row2 = mysqli_fetch_array($resultado_platillo)):
 			?>
           <tr>
-            <td><?php echo $row2['nombre_platillo']; ?></td>
-            <td><a href="escandallo.php?id=<?php echo $row2['id_platillo'] ?>"><i class="material-icons center-align">developer_board</i></a></td>
-            <td><a href="ficha_tecnica.php?id=<?php echo $row2['id_platillo']  ?>"><i class="material-icons center-align">import_contacts</i></a></td>
-            <td><a href="anadir_ingredientes.php?id=<?php echo $row2['id_platillo']  ?>"><i class="material-icons center-align">forward</i></a></td>
-            <td><a href="actualizar_platillos.php?id=<?php echo $row2['id_platillo'] ?>"><i class="material-icons">edit</i></a></td>
-            <td><a href="eliminar.php?id_plat=<?php echo $row2['id_platillo'] ?>"><i class="material-icons">delete</i></a></td>
+            <td><?php //echo $row2['nombre_platillo']; ?></td>
+            <td><a href="escandallo.php?id=<?php //echo $row2['id_platillo'] ?>"><i class="material-icons center-align">developer_board</i></a></td>
+            <td><a href="ficha_tecnica.php?id=<?php //echo $row2['id_platillo']  ?>"><i class="material-icons center-align">import_contacts</i></a></td>
+            <td><a href="anadir_ingredientes.php?id=<?php //echo $row2['id_platillo']  ?>"><i class="material-icons center-align">forward</i></a></td>
+            <td><a href="actualizar_platillos.php?id=<?php //echo $row2['id_platillo'] ?>"><i class="material-icons">edit</i></a></td>
+            <td><a href="eliminar.php?id_plat=<?php //echo $row2['id_platillo'] ?>"><i class="material-icons">delete</i></a></td>
           </tr>
             <?php
-				endwhile;
+				//endwhile;
             ?>
         </tbody>
       </table> 
         
-    </div>
+    </div>-->
         
-        <!--Ingredientes
+        <!--Ingredientes-->
   <div id="ingredientes" class="col s12">
       
       </br>
@@ -91,26 +89,26 @@
           </tr>
         </thead>
           <?php
-			 //while($row = mysqli_fetch_array($resultado)):
+			while($row = mysqli_fetch_array($resultado)):
 			?>
         <tbody>
           <tr>
             
-            <td><?php // echo $row['nombre_ingrediente']; ?></td>
-            <td><?php  //echo $row['codigo']; ?></td>
-            <td><?php  //echo $row['cantidad']; ?></td>
-            <td><?php  //echo $row['des_unidad']; ?></td>
-            <td><?php  //echo $row['costo_unitario']; ?></td>
-            <td><?php // echo $row['costo_presentacion']; ?></td>
-            <td><a href="actualizar_ingre.php?id=<?php  //echo $row['id_ingredientes']; ?>"><i class="material-icons">edit</i></a></td>
-            <td><a href="eliminar_ingre.php?id_ingre=<?php  //echo $row['id_ingredientes']; ?>"><i class="material-icons">delete</i></a></td>
+            <td><?php echo $row['nombre_ingrediente']; ?></td>
+            <td><?php echo $row['codigo']; ?></td>
+            <td><?php echo $row['cantidad']; ?></td>
+            <td><?php echo $row['des_unidad']; ?></td>
+            <td><?php echo $row['costo_unitario']; ?></td>
+            <td><?php echo $row['costo_presentacion']; ?></td>
+            <td><a href="actualizar_ingre.php?id=<?php echo $row['id_ingredientes']; ?>"><i class="material-icons">edit</i></a></td>
+            <td><a href="eliminar_ingre.php?id_ingre=<?php echo $row['id_ingredientes']; ?>"><i class="material-icons">delete</i></a></td>
           </tr>
         </tbody>
            <?php
-				 //endwhile;
+				endwhile;
             ?>
       </table>
-    </div>-->
+    </div>
  
         
           

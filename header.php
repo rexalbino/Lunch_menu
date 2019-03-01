@@ -25,12 +25,27 @@
         <li><a href="collapsible.html">JavaScript</a></li>
       </ul>-->
     </div>
-    <div class="nav-content">
+    <!--<div class="nav-content">
     
       <ul class="tabs tabs-transparent">
-        <li class="tab"><a href="index.php#platillos">Platillos</a></li>
-        <li class="tab"><a  href="index.php#ingredientes">Ingredientes</a></li>
+        <li class="tab"><a href="index.php">Platillos</a></li>
+        <li class="tab"><a href="ingredientes.php">Ingredientes</a></li>
       </ul>
     
+    </div>-->
+            
+     <div class="row black">
+    <div class="col s12">
+      <ul class="tabs black">
+        <li class="tab col s3 white-text"><a href="index.php" target="_self">Platillos</a></li>
+        <li class="tab col s3"><a href="ingredientes.php" target="_self" <?php if(isset($dondeestoy)&$dondeestoy='1'){  ?> class="active"<?php } ?>>Ingredientes</a></li>
+      </ul>
     </div>
+  </div>
   </nav>
+        <script>
+        $(document).ready(function(){
+    $('ul.tabs').tabs();
+  });
+        
+        </script>

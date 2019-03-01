@@ -3,8 +3,8 @@
     require 'conexion.php';
 
     $id_platillo=$_GET['id_plat'];
-    $SQL="SELECT `nombre_platillo` FROM `platillo` WHERE `id_platillo`='$id_platillo' ";
-    $get_platillo = mysqli_query($link,$SQL);
+    $sql="SELECT `nombre_platillo` FROM `platillo` WHERE `id_platillo`='$id_platillo' ";
+    $get_platillo = mysqli_query($link,$sql);
     $platillo = mysqli_fetch_assoc($get_platillo);
 
 ?>
