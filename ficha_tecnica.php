@@ -62,11 +62,11 @@
         </tbody>
       </table>
        
-        </div>
+        <!--</div>
         <div class="col m4">
             
        <img src="https://picsum.photos/200">
-        </div>
+        </div>-->
         
     </div>
     <hr/>

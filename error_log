@@ -1,0 +1,15 @@
+[25-Feb-2019 22:00:19 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/mxlunfood/public_html/test1/conexion.php on line 2
+[25-Feb-2019 22:00:19 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home/mxlunfood/public_html/test1/index.php on line 8
+[25-Feb-2019 22:00:19 UTC] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, boolean given in /home/mxlunfood/public_html/test1/index.php on line 8
+[26-Feb-2019 18:11:51 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/mxlunfood/public_html/test1/Subir_ingredientes.php:14) in /home/mxlunfood/public_html/test1/Subir_ingredientes.php on line 55
+[26-Feb-2019 19:07:57 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/mxlunfood/public_html/test1/header.php:36) in /home/mxlunfood/public_html/test1/datosplatillo.php on line 20
+[26-Feb-2019 19:16:53 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/mxlunfood/public_html/test1/header.php:36) in /home/mxlunfood/public_html/test1/datosplatillo.php on line 20
+[26-Feb-2019 19:28:02 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/mxlunfood/public_html/test1/header.php:36) in /home/mxlunfood/public_html/test1/datosplatillo.php on line 21
+[26-Feb-2019 19:44:20 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/mxlunfood/public_html/test1/Subir_ingredientes.php:14) in /home/mxlunfood/public_html/test1/Subir_ingredientes.php on line 55
+[27-Feb-2019 18:25:23 UTC] PHP Warning:  Division by zero in /home/mxlunfood/public_html/test1/escandallo.php on line 64
+[27-Feb-2019 18:25:23 UTC] PHP Warning:  Division by zero in /home/mxlunfood/public_html/test1/escandallo.php on line 64
+[27-Feb-2019 18:25:23 UTC] PHP Warning:  Division by zero in /home/mxlunfood/public_html/test1/escandallo.php on line 64
+[27-Feb-2019 18:25:23 UTC] PHP Warning:  Division by zero in /home/mxlunfood/public_html/test1/escandallo.php on line 64
+[27-Feb-2019 18:25:23 UTC] PHP Warning:  Division by zero in /home/mxlunfood/public_html/test1/escandallo.php on line 64
+[27-Feb-2019 18:25:23 UTC] PHP Warning:  Division by zero in /home/mxlunfood/public_html/test1/escandallo.php on line 64
+[27-Feb-2019 18:25:23 UTC] PHP Warning:  Division by zero in /home/mxlunfood/public_html/test1/escandallo.php on line 64

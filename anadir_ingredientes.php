@@ -77,9 +77,16 @@ echo "<div class='container center_align'><h3>Estas trbajando con el platillo ".
     <div class="col m1 s6">
         <?php if($ingre=="1"){ ?><p><?php echo $nombreingrediente['des_unidad']; ?></p><?php } ?>
     </div>
-    <div class="input-field col m4 s12">
+    <div class="input-field col m2 s6">
         <input id="merma" name="merma" type="number" class="validate" onkeyup="cant_neto();cost_neto();pax_pesos();" step="any" required>
         <label class="active" for="first_name2">Merma</label>
+    </div>
+    <div class="col m2 s6">
+        <label>Tipo merma</label>
+            <select class="browser-default" id="id_merma" name="id_merma" onchange="cant_neto();cost_neto();pax_pesos();" required>
+            <option value="1" selected>Porcentaje</option>
+            <option value="2">Peso</option>
+            </select>
     </div>
     <div class="input-field col m3 s12">
         <input id="neto" name="neto" type="number" class="validate" step="any" value="0" readoly required>
@@ -153,7 +160,11 @@ echo "<div class='container center_align'><h3>Estas trbajando con el platillo ".
         //Calculamos el número escrito:
             ingreso1 = (isNaN(parseFloat(ingreso1)))? 0 : parseFloat(ingreso1);
             ingreso2 = (isNaN(parseFloat(ingreso2)))? 0 : parseFloat(ingreso2);
-            document.envio_ingre.neto.value = ingreso1*((100-ingreso2)/100);
+                if(document.envio_ingre.id_merma.value=='1'){
+                        document.envio_ingre.neto.value = ingreso1*((100-ingreso2)/100);
+                    }else{
+                        document.envio_ingre.neto.value = ingreso1-ingreso2;
+                    }
             }
         //Si se produce un error no hacemos nada
             catch(e) {}

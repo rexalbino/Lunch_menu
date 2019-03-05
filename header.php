@@ -39,6 +39,7 @@
       <ul class="tabs black">
         <li class="tab col s3 white-text"><a href="index.php" target="_self">Platillos</a></li>
         <li class="tab col s3"><a href="ingredientes.php" target="_self" <?php if(isset($dondeestoy)&$dondeestoy='1'){  ?> class="active"<?php } ?>>Ingredientes</a></li>
+        <li class="tab col s3"><a href="menus.php" target="_self" <?php if(isset($dondeestoy)&$dondeestoy='2'){  ?> class="active"<?php } ?>>Menus</a></li>
       </ul>
     </div>
   </div>

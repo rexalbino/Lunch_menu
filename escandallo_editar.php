@@ -17,7 +17,7 @@ require('header.php');
         $ingre ="0";
     }
 
-        $relacion_datos="SELECT * FROM `platillo_ingrediente` WHERE `id_relacion`='$id_relacion' ";
+        $relacion_datos="SELECT *,merma.des_merma AS melma FROM `platillo_ingrediente` INNER JOIN merma on platillo_ingrediente.id_tipo_merma=merma.id_merma WHERE `id_relacion`='$id_relacion' ";
         $get_relacion = mysqli_query($link,$relacion_datos);
         $datos_relacion = mysqli_fetch_assoc($get_relacion);
     
@@ -27,44 +27,14 @@ require('header.php');
     $nombredelplatillo = mysqli_fetch_assoc($obtener_platillo);
 
     
-echo "<div class='container center_align'><h3>Estas trbajando con el platillo <b>". $nombredelplatillo['nombre_platillo']."</b></h3></div>" ;
+echo "<div class='container center_align'><h3>Estas trabajando con el platillo <b>". $nombredelplatillo['nombre_platillo']."</b></h3></div>" ;
     
     $sql_ingredientes="SELECT * FROM `ingredientes` ";
     $obtener_ingredientes = mysqli_query($link,$sql_ingredientes);
 ?>
 <div class="container">
     
-<!--<div class="row">
-   <form id="ingredientes" action="anadir_ingredientes.php" method="get">
-    <div class=" col m6 s12">
-    <div style="visibility: hidden;">
-        <input type="number" value="<?php //echo $id_libre ?>" id="id" name="id">
-    </div> 
-    <label>Selecciona el ingrediente</label>
-  <select class="browser-default" id="id_ingrediente" name="id_ingrediente" <?php //if($ingre=="1"){ ?> <?php // }else{  ?>required <?php //} ?>>
-    <option value="" disabled selected>Elije un ingrediente</option>
-    <?php
-		//while($row = mysqli_fetch_array($obtener_ingredientes)):
-      ?>
-    <option value="<?php //echo $row['id_ingredientes']; ?>"><?php //echo $row['nombre_ingrediente']; ?></option>
-    <?php
-      //endwhile;
-    ?>
-  </select>
-       
-    </div>
-    
-    </form>
-    <div class="col m6 s12">
-       <br/>
-       <br/>
-       <br/>
-        <button class="btn waves-effect waves-light" type="submit" name="action" form="ingredientes" value="choose">Obtener datos
-            <i class="material-icons right">send</i>
-        </button>
-        
-    </div>
-    </div>-->
+
     <?php if($ingre=="1"){ ?>
     <div class="row">
        <div class="col m8 s12">
@@ -76,15 +46,23 @@ echo "<div class='container center_align'><h3>Estas trbajando con el platillo <b
     <form id="envio_ingre" name="envio_ingre" method="post" action="update_escandillo.php">
 <div class="row">
     <div class="input-field col m3 s6">
-        <input id="bruto" name="bruto" value="<?php echo $datos_relacion['peso_bruto'];  ?>" type="number" class="validate" step="any" onkeyup="cant_neto();cost_neto();pax_pesos();" required>
+        <input id="bruto" name="bruto" value="<?php echo $datos_relacion['peso_bruto'];  ?>" type="number" class="validate" step="any" onkeyup="cant_neto();cost_neto();pax_pesos()" required>
         <label class="active" for="first_name2">Peso bruto</label>
     </div>
     <div class="col m1 s6">
         <?php if($ingre=="1"){ ?><p><?php echo $nombreingrediente['des_unidad']; ?></p><?php } ?>
     </div>
-    <div class="input-field col m4 s12">
-        <input id="merma" name="merma" type="number" value="<?php echo $datos_relacion['merma'];  ?>" class="validate" onkeyup="cant_neto();cost_neto();pax_pesos();" step="any" required>
+    <div class="input-field col m2 s6">
+        <input id="merma" name="merma" type="number" value="<?php echo $datos_relacion['merma'];  ?>"  class="validate" onkeyup="cant_neto();cost_neto();pax_pesos();" step="any" required>
         <label class="active" for="first_name2">Merma</label>
+    </div>
+    <div class="col m2 s6">
+        <label>Tipo merma</label>
+            <select class="browser-default" id="id_merma" name="id_merma" onchange="cant_neto();cost_neto();pax_pesos();" required>
+            <option value="<?php echo $datos_relacion['id_tipo_merma']; ?>" selected disabled><?php echo $datos_relacion['melma']; ?></option>
+            <option value="1" >Porcentaje</option>
+            <option value="2">Peso</option>
+            </select>
     </div>
     <div class="input-field col m3 s12">
         <input id="neto" name="neto" type="number" value="<?php echo $datos_relacion['peso_neto'];  ?>" class="validate" step="any" value="0" readoly required>
@@ -110,27 +88,30 @@ echo "<div class='container center_align'><h3>Estas trbajando con el platillo <b
     
 </div>
 <div class="row" style="visibility: hidden;">
-    <div class="col m4 s12" >
+    <div class="col m3 s12" >
             <input type="number" value="<?php echo  $id_relacion ?>" id="relacion" name="relacion" readonly>
         </div>
-    <div class="col m4 s12" >
+    <div class="col m3 s12" >
         <input type="number" id="anteriorneto" name="anteriorneto" value="<?php echo  $datos_relacion['coste_neto']; ?>" readonly>
     </div>
-   <div class="col m4 s12" >
+   <div class="col m3 s12" >
         <input type="number" id="id_recetaa" name="id_recetaa" value="<?php echo  $nombredelplatillo['id_platillo']; ?>" readonly>
     </div>
+    <div class="col m3 s12" >
+            <input type="number" value="<?php echo  $nombredelplatillo['porciones']; ?>" id="porciones" name="porciones" disabled>
+        </div>
 </div>
 </form>
     <div class="container center-align">
 <div class="row">
     <div class="col s6">
     
-        <button class="btn-large waves-effect waves-light" type="submit" name="action" form="envio_ingre" value="choose" disabled>Editar
+        <button class="btn-large waves-effect waves-light" type="submit" name="action" form="envio_ingre" value="choose" >Editar
             <i class="material-icons right">send</i>
         </button>    
     </div>
     <div class="col s6">
-        <a href="ingredientes.php" class="waves-effect waves-light btn-large red accent-4"><i class="material-icons right">close</i>Cancelar</a>
+        <a href="escandallo.php?id=<?php echo $id_libre; ?>" class="waves-effect waves-light btn-large red accent-4"><i class="material-icons right">close</i>Cancelar</a>
     </div>
     
     </div>
@@ -158,7 +139,11 @@ echo "<div class='container center_align'><h3>Estas trbajando con el platillo <b
         //Calculamos el número escrito:
             ingreso1 = (isNaN(parseFloat(ingreso1)))? 0 : parseFloat(ingreso1);
             ingreso2 = (isNaN(parseFloat(ingreso2)))? 0 : parseFloat(ingreso2);
-            document.envio_ingre.neto.value = ingreso1*((100-ingreso2)/100);
+            if(document.envio_ingre.id_merma.value=='1'){
+                        document.envio_ingre.neto.value = ingreso1*((100-ingreso2)/100);
+                    }else{
+                        document.envio_ingre.neto.value = ingreso1-ingreso2;
+                    }
             }
         //Si se produce un error no hacemos nada
             catch(e) {}
