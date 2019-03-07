@@ -3,6 +3,8 @@
     require('conexion.php');
     require('header.php');
 
+    $id=$_GET['id'];
+
     $nombre=$_POST['nombreingrediente'];
     $entrada=$_POST['entrada'];
     $fuerte=$_POST['fuerte'];
@@ -14,17 +16,14 @@
     }else{
         $nota='N/A';
     }
-    /*if($_POST['guarnicion2']=='0'){
-        $guar2=NULL;
-    }else{*/
         $guar2=$_POST['guarnicion2'];
     
 
-    echo "Estoy sosteniendo ".$nombre." , ".$entrada." , ".$fuerte." , ".$guar1." , ".$guar2." , ".$nota;
+    echo "Estoy sosteniendo ".$nombre." , ".$entrada." , ".$fuerte." , ".$guar1." , ".$guar2." , ".$nota." , ".$id;
     
-    $sql="INSERT INTO `menus` (`id_menu`, `nombre_menu`, `id_entrada`, `id_plato_fuerte`, `id_guarnicion_1`, `id_guarnicion_2`, `nota`) VALUES (NULL, '$nombre', '$entrada', '$fuerte', '$guar1', '$guar2', '$nota');";
+    $sql="UPDATE `menus` SET `nombre_menu` = '$nombre', `id_entrada` = '$entrada', `id_plato_fuerte` = '$fuerte', `id_guarnicion_1` = '$guar1', `id_guarnicion_2` = '$guar2', `nota` = '$nota' WHERE `menus`.`id_menu` = '$id';";
     if(mysqli_query($link,$sql)){
-        echo "Introducido";
+        echo "Actualizado";
         //header("Location: anadir_ingredientes.php?id=$id_platillo");
         
         ?>

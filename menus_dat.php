@@ -1,0 +1,89 @@
+<?php
+    require'header.php';
+    require'conexion.php';
+
+    $id=$_GET['id'];
+
+    //echo $id;
+
+    $sql="SELECT id_menu,`id_entrada`,`id_plato_fuerte`,`id_guarnicion_1`,`id_guarnicion_2`,`nombre_menu`,entrada.nombre_platillo as entrada,fuerte.nombre_platillo as fuerte,guar1.nombre_platillo as guar1,guar2.nombre_platillo as guar2 FROM `menus` INNER JOIN platillo AS entrada ON entrada.id_platillo = id_entrada INNER JOIN platillo AS fuerte ON fuerte.id_platillo = menus.id_plato_fuerte INNER JOIN platillo AS guar1 ON guar1.id_platillo=menus.id_guarnicion_1 INNER JOIN platillo AS guar2 ON guar2.id_platillo=menus.id_guarnicion_2 WHERE id_menu='$id' ";
+    $get_dato_menu = mysqli_query($link,$sql);
+    $menu = mysqli_fetch_assoc($get_dato_menu);
+
+    $entrada=$menu['id_entrada'];
+    $fuerte = $menu['id_plato_fuerte'];
+    $guar1 = $menu['id_guarnicion_1'];
+    $guar2 = $menu['id_guarnicion_2'];
+
+    $sql_entrada="SELECT SUM(`coste_neto`) as sumaneto,SUM(`pax_pesos`)AS sumapax FROM platillo_ingrediente WHERE `id_platillo`='$entrada'; ";
+    $get_costo_entrada = mysqli_query($link,$sql_entrada);
+    $costo_entrada = mysqli_fetch_assoc($get_costo_entrada);
+
+    $sql_fuerte="SELECT SUM(`coste_neto`) as sumaneto,SUM(`pax_pesos`)AS sumapax FROM platillo_ingrediente WHERE `id_platillo`='$fuerte'; ";
+    $get_costo_fuerte = mysqli_query($link,$sql_fuerte);
+    $costo_fuerte = mysqli_fetch_assoc($get_costo_fuerte);
+
+    $sql_guarnicion1="SELECT SUM(`coste_neto`) as sumaneto,SUM(`pax_pesos`)AS sumapax FROM platillo_ingrediente WHERE `id_platillo`='$guar1'; ";
+    $get_costo_guarnicion1 = mysqli_query($link,$sql_guarnicion1);
+    $costo_guarnicion1 = mysqli_fetch_assoc($get_costo_guarnicion1);
+
+    $sql_guarnicion2="SELECT SUM(`coste_neto`) as sumaneto,SUM(`pax_pesos`)AS sumapax FROM platillo_ingrediente WHERE `id_platillo`='$guar2'; ";
+    $get_costo_guarnicion2 = mysqli_query($link,$sql_guarnicion2);
+    $costo_guarnicion2 = mysqli_fetch_assoc($get_costo_guarnicion2);
+
+    
+?>
+<div class="container">
+    
+    <div class="row">
+        <div class="col m6 s12">
+            <h2><b>Menu:</b> <?php echo $menu['nombre_menu']; ?></h2>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+    <div class="col s6">
+        <h4><b>Costo neto total: <?php echo $costo_entrada['sumaneto']+$costo_fuerte['sumaneto']+$costo_guarnicion1['sumaneto']+$costo_guarnicion2['sumaneto'] ?></b></h4>    
+    </div>
+    <div class="col s6">
+        <h4><b>Costo pax total: <?php echo $costo_entrada['sumapax']+$costo_fuerte['sumapax']+$costo_guarnicion1['sumapax']+$costo_guarnicion2['sumapax'] ?></b></h4>    
+    </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col m6 s12">
+            <h3><b>Entrada:</b> <?php echo $menu['entrada']; ?> </h3><br/>
+            <h4><b>Costo neto:</b> <?php echo round($costo_entrada['sumaneto'],3,PHP_ROUND_HALF_UP); ?> </h4><br/>
+            <h4><b>Costo pax:</b> <?php echo round($costo_entrada['sumapax'],3,PHP_ROUND_HALF_UP); ?> </h4>
+            
+        </div>
+        <div class="col m6 s12">
+            <h3><b>Platillo fuerte:</b> <?php echo $menu['fuerte']; ?> </h3><br/>
+            <h4><b>Costo neto:</b> <?php echo round($costo_fuerte['sumaneto'],3,PHP_ROUND_HALF_UP); ?> </h4><br/>
+            <h4><b>Costo pax:</b> <?php echo round($costo_fuerte['sumapax'],3,PHP_ROUND_HALF_UP); ?> </h4>
+        </div>
+        <div class="col m6 s12">
+            <h3><b>Guarnicion 1:</b> <?php echo $menu['guar1']; ?> </h3><br/>
+            <h4><b>Costo neto:</b> <?php echo round($costo_guarnicion1['sumaneto'],3,PHP_ROUND_HALF_UP); ?> </h4><br/>
+            <h4><b>Costo pax:</b> <?php echo round($costo_guarnicion1['sumapax'],3,PHP_ROUND_HALF_UP); ?> </h4>
+        </div>
+        <div class="col m6 s12">
+            <h3><b>Guarnicion 2:</b> <?php echo $menu['guar2']; ?> </h3><br/>
+            <h4><b>Costo neto:</b> <?php echo round($costo_guarnicion2['sumaneto'],3,PHP_ROUND_HALF_UP); ?> </h4><br/>
+            <h4><b>Costo pax:</b> <?php echo round($costo_guarnicion2['sumapax'],3,PHP_ROUND_HALF_UP); ?> </h4>
+        </div>
+    </div>
+    <div class="container center-align">
+<div class="row">
+    <div class="col s12">
+    
+        <a href="menus.php" class="waves-effect waves-light btn-large black center-align"><i class="material-icons right">keyboard_return</i>Volver a resumen</a>   
+    </div>
+    <!--<div class="col s6">
+        <a href="ingredientes.php" class="waves-effect waves-light btn-large red accent-4"><i class="material-icons right">close</i>Editar</a>
+    </div>-->
+    
+    </div>
+</div>
+    
+</div>
