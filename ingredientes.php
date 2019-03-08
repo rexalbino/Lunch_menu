@@ -75,7 +75,7 @@
         </br>
         </br>
         </br>
-      <table>
+      <table class="responsive-table">
         <thead>
           <tr>
               <th>Nombre ingrediente</th>

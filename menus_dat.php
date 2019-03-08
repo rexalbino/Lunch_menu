@@ -52,26 +52,34 @@
     <hr/>
     <div class="row">
         <div class="col m6 s12">
+            <hr/>
             <h3><b>Entrada:</b> <?php echo $menu['entrada']; ?> </h3><br/>
             <h4><b>Costo neto:</b> <?php echo round($costo_entrada['sumaneto'],3,PHP_ROUND_HALF_UP); ?> </h4><br/>
             <h4><b>Costo pax:</b> <?php echo round($costo_entrada['sumapax'],3,PHP_ROUND_HALF_UP); ?> </h4>
             
         </div>
+        
         <div class="col m6 s12">
+            <hr/>
             <h3><b>Platillo fuerte:</b> <?php echo $menu['fuerte']; ?> </h3><br/>
             <h4><b>Costo neto:</b> <?php echo round($costo_fuerte['sumaneto'],3,PHP_ROUND_HALF_UP); ?> </h4><br/>
             <h4><b>Costo pax:</b> <?php echo round($costo_fuerte['sumapax'],3,PHP_ROUND_HALF_UP); ?> </h4>
         </div>
+        
         <div class="col m6 s12">
+            <hr/>
             <h3><b>Guarnicion 1:</b> <?php echo $menu['guar1']; ?> </h3><br/>
             <h4><b>Costo neto:</b> <?php echo round($costo_guarnicion1['sumaneto'],3,PHP_ROUND_HALF_UP); ?> </h4><br/>
             <h4><b>Costo pax:</b> <?php echo round($costo_guarnicion1['sumapax'],3,PHP_ROUND_HALF_UP); ?> </h4>
         </div>
+        
         <div class="col m6 s12">
+            <hr/>
             <h3><b>Guarnicion 2:</b> <?php echo $menu['guar2']; ?> </h3><br/>
             <h4><b>Costo neto:</b> <?php echo round($costo_guarnicion2['sumaneto'],3,PHP_ROUND_HALF_UP); ?> </h4><br/>
             <h4><b>Costo pax:</b> <?php echo round($costo_guarnicion2['sumapax'],3,PHP_ROUND_HALF_UP); ?> </h4>
         </div>
+        
     </div>
     <div class="container center-align">
 <div class="row">

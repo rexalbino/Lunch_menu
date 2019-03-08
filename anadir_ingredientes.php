@@ -7,7 +7,7 @@ require('header.php');
     
     if(isset($_GET['id_ingrediente'])){
         $id_ingrediente =$_GET['id_ingrediente'];
-        $sql_get_ingredientes = "SELECT `id_ingredientes`,`codigo`,`cantidad`,`nombre_ingrediente`,`costo_presentacion`,`costo_unitario` ,unidad.des_unidad FROM `ingredientes` INNER JOIN unidad ON ingredientes.id_unidad = unidad.id_unidad WHERE `id_ingredientes`='$id_ingrediente' ";
+        $sql_get_ingredientes = "SELECT `id_ingredientes`,`codigo`,`cantidad`,`nombre_ingrediente`,`costo_presentacion`,`costo_unitario` ,unidad.des_unidad,unidad.id_unidad FROM `ingredientes` INNER JOIN unidad ON ingredientes.id_unidad = unidad.id_unidad WHERE `id_ingredientes`='$id_ingrediente' ";
         $get_igredientes = mysqli_query($link,$sql_get_ingredientes);
         $nombreingrediente = mysqli_fetch_assoc($get_igredientes);
         $ingre="1";
@@ -71,15 +71,17 @@ echo "<div class='container center_align'><h3>Estas trbajando con el platillo ".
     <form id="envio_ingre" name="envio_ingre" method="post" action="subir_relacion_plaxingre.php">
 <div class="row">
     <div class="input-field col m3 s6">
-        <input id="bruto" name="bruto" type="number" class="validate" step="any" onkeyup="cant_neto();cost_neto();" required>
+        <input id="bruto" name="bruto" type="number" class="validate" step="any" onkeyup="cant_neto();cost_neto();pax_pesos();" required>
         <label class="active" for="first_name2">Peso bruto</label>
     </div>
     <div class="col m1 s6">
-        <?php if($ingre=="1"){ ?><p><?php echo $nombreingrediente['des_unidad']; ?></p><?php } ?>
+        <?php if($ingre=="1"){ ?><p><?php echo $nombreingrediente['des_unidad']; $id_ingre=$nombreingrediente['id_unidad']; ?></p><?php } ?>
+        
     </div>
     <div class="input-field col m2 s6">
-        <input id="merma" name="merma" type="number" class="validate" onkeyup="cant_neto();cost_neto();pax_pesos();" step="any" required>
+        <input id="merma" name="merma" type="number" class="validate" onkeyup="cant_neto();cost_neto();pax_pesos();" step="any" required <?php if($ingre=="1"){if($id_ingre=='5'){ echo "value='0' readonly"; }else{}} ?> >
         <label class="active" for="first_name2">Merma</label>
+        
     </div>
     <div class="col m2 s6">
         <label>Tipo merma</label>
@@ -89,7 +91,7 @@ echo "<div class='container center_align'><h3>Estas trbajando con el platillo ".
             </select>
     </div>
     <div class="input-field col m3 s12">
-        <input id="neto" name="neto" type="number" class="validate" step="any" value="0" readoly required>
+        <input id="neto" name="neto" type="number" class="validate" step="any" value="0" readonly required>
         <label class="active" for="first_name2">Peso neto</label>
     </div>
     <div class="col m1 s6">
@@ -102,24 +104,27 @@ echo "<div class='container center_align'><h3>Estas trbajando con el platillo ".
         <label class="active" for="first_name2">Coste unitario bruto</label>
     </div>
     <div class="input-field col m4 s6">
-        <input id="totalneto" name="totalneto" value="0" type="number" class="validate" step="any" required>
+        <input id="totalneto" name="totalneto" value="0" type="number" class="validate" step="any" readonly required>
         <label class="active" for="first_name2">Coste total neto</label>
     </div>
     <div class="input-field col m4 s6">
-        <input id="paxpesos" name="paxpesos" value="0" readonly type="text" class="validate" step="any" required>
+        <input id="paxpesos" name="paxpesos" value="0" type="text" class="validate" step="any" readonly required>
         <label class="active" for="first_name2">Precio por pax pesos</label>
     </div>
     
 </div>
 <div class="row" style="visibility: hidden;">
-    <div class="col m4 s12" >
+    <div class="col m3 s12" >
             <input type="number" value="<?php echo  $nombredelplatillo['porciones']; ?>" id="porciones" name="porciones" disabled>
         </div>
-    <div class="col m4 s12" >
+    <div class="col m3 s12" >
         <input type="number" id="id_recetaa" name="id_recetaa" value="<?php echo  $nombredelplatillo['id_platillo']; ?>" readonly>
     </div>
-    <div class="col m4 s12" >
+    <div class="col m3 s12" >
         <input type="number" id="id_ingreeee" name="id_ingreee" value="<?php echo  $nombreingrediente['id_ingredientes']; ?>" readonly>
+    </div>
+    <div class="col m3 s12" >
+        <input type="number" id="id_unidad" name="id_unidad" value="<?php echo  $nombreingrediente['id_unidad']; ?>" readonly>
     </div>
 </div>
 </form>
@@ -132,7 +137,7 @@ echo "<div class='container center_align'><h3>Estas trbajando con el platillo ".
         </button>    
     </div>
     <div class="col s6">
-        <a href="ingredientes.php" class="waves-effect waves-light btn-large red accent-4"><i class="material-icons right">close</i>Cancelar</a>
+        <a href="index.php" class="waves-effect waves-light btn-large red accent-4"><i class="material-icons right">close</i>Cancelar</a>
     </div>
     
     </div>
@@ -184,7 +189,11 @@ echo "<div class='container center_align'><h3>Estas trbajando con el platillo ".
             ingresoc1 = (isNaN(parseFloat(ingresoc1)))? 0 : parseFloat(ingresoc1);
             ingresoc2 = (isNaN(parseFloat(ingresoc2)))? 0 : parseFloat(ingresoc2);
             ingresoc3 = (isNaN(parseFloat(ingresoc3)))? 0 : parseFloat(ingresoc3);
-            document.envio_ingre.totalneto.value = ingresoc1+((ingresoc2-ingresoc3)*ingresoc1);
+            if(document.envio_ingre.id_unidad.value=='5'){
+                document.envio_ingre.totalneto.value = ingresoc1*ingresoc3;
+            }else{
+                document.envio_ingre.totalneto.value = ingresoc1+((ingresoc2-ingresoc3)*ingresoc1);
+                }
             }
         //Si se produce un error no hacemos nada
             catch(e) {}

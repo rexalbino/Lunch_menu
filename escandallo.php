@@ -31,13 +31,12 @@
               <th><?php echo $platillo['porciones']; ?></th> <!-- Atraccion segun el id de la tabla platillo -->
               <th>Tiempo de preparacion</th>
               <th><?php echo $platillo['tiempo_preparacion']." Minutos "; ?></th> <!-- Atraccion segun el id de la tabla platillo -->
-              <th>No. Revisi&oacute;n</th>
-              <th>001</th>
-          </tr>
+            </tr>
+            
         </thead>
 </table>
 <hr/>
-      <table>
+      <table class="responsive-table">
         <thead>
           <tr>
               <th>Clave</th>
@@ -69,7 +68,7 @@
             <td><?php echo $row2['peso_neto']; ?></td>
             <td><?php echo $row2['coste_unitario'];?></td>
             <td><?php echo round($row2['coste_neto'],3,PHP_ROUND_HALF_UP) ; ?></td>
-            <td><?php echo round( $row2['pax_pesos'], 4, PHP_ROUND_HALF_UP); ?></td>
+            <td><?php echo round( $row2['pax_pesos'], 3, PHP_ROUND_HALF_UP); ?></td>
             <td><?php echo round(((FLOAT)$row2['coste_neto'] / (FLOAT)$neton['suma'])*100,3,PHP_ROUND_HALF_UP); ?></td>
             <td><a href="escandallo_editar.php?id_platillo=<?php echo $row2['id_platillo']; ?>&id_rel=<?php echo $row2['id_relacion']; ?>&id_ingre=<?php echo $row2['id_ingrediente']; ?>"><i class="material-icons">edit</i></a></td>
             <td><a href="escandillo_eliminar_rel.php?id_platillo=<?php echo $row2['id_platillo']; ?>&id_rel=<?php echo $row2['id_relacion']; ?>&id_ingre=<?php echo $row2['id_ingrediente'];?>"><i class="material-icons">delete</i></a></td>
@@ -114,5 +113,9 @@
         <a href="index.php" class="waves-effect waves-light btn-large black center-align"><i class="material-icons right">keyboard_return</i>Volver a inicio</a>
         </div>
     </div>
+    <tr>
+              <th>No. Revisi&oacute;n</th>
+              <th>001</th>
+          </tr>
     
 </div>

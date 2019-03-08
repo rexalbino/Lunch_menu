@@ -34,15 +34,16 @@
         </br>
         </br>
         </br>
-        <table>
+        <table class="responsive-table centered">
         <thead>
           <tr>
-              <th>Nombre de Platillo</th>
-              <th>Escandallo</th>
-              <th>Ficha tecnica</th>
-              <th>Añadir ingredientes</th>
-              <th>Editar</th>
-              <th>Borrar</th>
+              <th >Nombre de Platillo</th>
+              <th >Escandallo</th>
+              <th >Ficha tecnica</th>
+              <th >Pax $</th>
+              <th >Añadir ingredientes</th>
+              <th >Editar</th>
+              <th >Borrar</th>
           </tr>
         </thead>
 
@@ -51,12 +52,21 @@
 			while($row2 = mysqli_fetch_array($resultado_platillo)):
 			?>
           <tr>
-            <td><?php echo $row2['nombre_platillo']; ?></td>
-            <td><a href="escandallo.php?id=<?php echo $row2['id_platillo'] ?>"><i class="material-icons center-align">developer_board</i></a></td>
-            <td><a href="ficha_tecnica.php?id=<?php echo $row2['id_platillo']  ?>"><i class="material-icons center-align">import_contacts</i></a></td>
-            <td><a href="anadir_ingredientes.php?id=<?php echo $row2['id_platillo']  ?>"><i class="material-icons center-align">forward</i></a></td>
-            <td><a href="actualizar_platillos.php?id=<?php echo $row2['id_platillo'] ?>"><i class="material-icons">edit</i></a></td>
-            <td><a href="eliminar.php?id_plat=<?php echo $row2['id_platillo'] ?>"><i class="material-icons">delete</i></a></td>
+            <td ><?php echo $row2['nombre_platillo']; ?></td>
+            <td ><a href="escandallo.php?id=<?php echo $row2['id_platillo'] ?>"><i class="material-icons center-align">developer_board</i></a></td>
+            <td ><a href="ficha_tecnica.php?id=<?php echo $row2['id_platillo']  ?>"><i class="material-icons center-align">import_contacts</i></a></td>
+            <td >
+            <?php
+              $id=$row2['id_platillo'];
+              $sql_get_pax="SELECT SUM(`pax_pesos`) AS suma FROM `platillo_ingrediente` WHERE `id_platillo`='$id';";
+              $get_pax = mysqli_query($link,$sql_get_pax);
+              $pax_pesos = mysqli_fetch_assoc($get_pax);
+                   echo round( $pax_pesos['suma'],3,PHP_ROUND_HALF_UP);
+            ?>
+            </td>
+            <td ><a href="anadir_ingredientes.php?id=<?php echo $row2['id_platillo']  ?>"><i class="material-icons center-align">forward</i></a></td>
+            <td ><a href="actualizar_platillos.php?id=<?php echo $row2['id_platillo'] ?>"><i class="material-icons">edit</i></a></td>
+            <td ><a href="eliminar.php?id_plat=<?php echo $row2['id_platillo'] ?>"><i class="material-icons">delete</i></a></td>
           </tr>
             <?php
 				endwhile;
