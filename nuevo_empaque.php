@@ -7,29 +7,32 @@
         require'header.php';
         require'conexion.php';
           
-        $sql_unidades=" SELECT * FROM `unidad` WHERE `id_unidad` BETWEEN 1 AND 5 ";
+        $sql_unidades=" SELECT * FROM `unidad` ";
         $resultado = mysqli_query($link,$sql_unidades) or die(mysqli_error($link));
+      
+        $sql_proveedores=" SELECT * FROM `proveedor`";
+        $resultado_proveedores = mysqli_query($link,$sql_proveedores) or die(mysqli_error($link));
       ?>
     
       
     <div class="container">
-    <h2>Ingresar nuevo ingrediente</h2>
+    <h2>Ingresar nuevo empaque</h2>
         
-    <form id="ingredientes" name="ingredientes" action="Subir_ingredientes.php" method="post">
+    <form id="ingredientes" name="ingredientes" action="anadir_empaque.php" method="post">
     <div class="row">
     <div class="input-field col m6 s12">
-      <input id="nombre_ingrediente" name="nombre_ingrediente" type="text" class="validate" required>
-      <label class="active" for="first_name2">Nombre del ingrediente</label>
+      <input id="nombreempque" name="nombreempque" type="text" class="validate" required>
+      <label class="active" for="first_name2">Nombre del empaque</label>
     </div>
     <div class="input-field col m6 s12">
       <input id="codigo" name="codigo" type="text" class="validate" required>
-      <label class="active" for="first_name2">Codigo del ingrediente</label>
+      <label class="active" for="first_name2">Codigo del empaque</label>
     </div>
     </div>
     <div class="row">
     <div class="input-field col m6 s12">
-        <input id="cantidad" name="cantidad" type="number" class="validate" onKeyUp="Suma()" step="any" required>
-        <label class="active" for="first_name2">Cantidad</label>
+      <input id="capacidad" name="capacidad" type="text" class="validate" required>
+      <label class="active" for="first_name2">Capacidad</label>
     </div>
     <div class="input-field col m6 s12">
         <select id="unidad" name="unidad" class="browser-default" required>
@@ -45,11 +48,18 @@
             ?>
     </select>
     </div> 
+    </div>
+    <div class="row">
+    <div class="input-field col m6 s12">
+        <input id="cantidad" name="cantidad" type="number" class="validate" onKeyUp="Suma()" step="any" required>
+        <label class="active" for="first_name2">Cantidad presentacion</label>
+    </div>
+    
     
     </div>
     <div class="row">
     <div class="input-field col m6 s12 center">
-        <input id="ppresentacion" step="any" name="ppresentacion" type="number" class="validate" onKeyUp="Suma()" required>
+        <input id="ppresentacion" name="ppresentacion" type="number" class="validate" onKeyUp="Suma()" required>
         <label class="active" for="first_name2">Precio de presentacion</label>
     </div>
         
@@ -59,17 +69,37 @@
         <label class="active" for="first_name2">Precio unitario</label>
     </div>
         
-    </div>    
+    </div>  
+    <div class="row">
+        <div class="input-field col m6 s12">
+        <select id="proveedor" name="proveedor" class="browser-default" required>
+      <option value="" disabled selected>Proveedores</option>
+    <?php
+			while($row2 = mysqli_fetch_array($resultado_proveedores)):
+			
+		?>
+      <option value="<?php echo $row2['id_proveedor'] ?>" ><?php echo $row2['des_proveedor']; ?></option>
+            
+    <?php
+				endwhile;
+            ?>
+    </select>
+    </div> 
+    <div class="input-field col m6 s12">
+          <textarea id="notas" name="notas" class="materialize-textarea" data-length="250"></textarea>
+          <label for="textarea1">Notas</label>
+</div>
+    </div>
     </form> 
     <div class="container center-align">
         <div class="row">
             <div class="col s6">
-                <button class="btn-large waves-effect waves-light" type="submit" name="action" form="ingredientes" value="choose">Subir ingrediente
+                <button class="btn-large waves-effect waves-light" type="submit" name="action" form="ingredientes" value="choose">Subir empaque
                     <i class="material-icons right">send</i>
                 </button>
             </div>
             <div class="col s6">
-                <a href="ingredientes.php" class="waves-effect waves-light btn-large red accent-4"><i class="material-icons right">close</i>Cancelar</a>
+                <a href="empaques.php" class="waves-effect waves-light btn-large red accent-4"><i class="material-icons right">close</i>Cancelar</a>
             </div>
         </div>
             

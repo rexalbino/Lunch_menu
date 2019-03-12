@@ -4,7 +4,7 @@
     require('header.php');
     $id=$_GET['id'];
 
-    $sql="SELECT id_menu,nota,`id_entrada`,`id_plato_fuerte`,`id_guarnicion_1`,`id_guarnicion_2`,`nombre_menu`,entrada.nombre_platillo as entrada,fuerte.nombre_platillo as fuerte,guar1.nombre_platillo as guar1,guar2.nombre_platillo as guar2 FROM `menus` INNER JOIN platillo AS entrada ON entrada.id_platillo = id_entrada INNER JOIN platillo AS fuerte ON fuerte.id_platillo = menus.id_plato_fuerte INNER JOIN platillo AS guar1 ON guar1.id_platillo=menus.id_guarnicion_1 INNER JOIN platillo AS guar2 ON guar2.id_platillo=menus.id_guarnicion_2 WHERE id_menu='$id' ";
+    $sql="SELECT id_menu,nota,`id_entrada`,`id_plato_fuerte`,`id_guarnicion_1`,`id_guarnicion_2`,`id_empaque1`,`id_empaque2`,`nombre_menu`,entrada.nombre_platillo as entrada,fuerte.nombre_platillo as fuerte,guar1.nombre_platillo as guar1,guar2.nombre_platillo as guar2, empa1.nombre AS empaq1, empa2.nombre AS empaq2 FROM `menus` INNER JOIN platillo AS entrada ON entrada.id_platillo = id_entrada INNER JOIN platillo AS fuerte ON fuerte.id_platillo = menus.id_plato_fuerte INNER JOIN platillo AS guar1 ON guar1.id_platillo=menus.id_guarnicion_1 INNER JOIN platillo AS guar2 ON guar2.id_platillo=menus.id_guarnicion_2 INNER JOIN enpaque AS empa1 ON empa1.id_empaque=menus.id_empaque1 INNER JOIN enpaque AS empa2 ON empa2.id_empaque=menus.id_empaque2 WHERE id_menu= '$id' ";
     $get_dato_menu = mysqli_query($link,$sql);
     $menu = mysqli_fetch_assoc($get_dato_menu);
 
@@ -14,6 +14,10 @@
     $obtener_platillos2 = mysqli_query($link,$sql);
     $obtener_platillos3 = mysqli_query($link,$sql);
     $obtener_platillos4 = mysqli_query($link,$sql);
+
+    $sql_empaques="SELECT `id_empaque`,`nombre` FROM `enpaque` ";
+    $obtener_empaques0= mysqli_query($link,$sql_empaques);
+    $obtener_empaques1= mysqli_query($link,$sql_empaques);
 
 ?>
 <div class="container">
@@ -96,6 +100,35 @@
           <textarea id="notas" name="notas" class="materialize-textarea" data-length="250"><?php echo $menu['nota']; ?></textarea>
           <label for="textarea1">Notas</label>
 </div>
+    <div class="col m6 s12">
+        <label>Selecciona empaque 1</label>
+            <select class="browser-default" id="empaque1" name="empaque1" required>
+                <option value="<?php echo $menu['id_empaque1']; ?>" selected><?php echo $menu['empaq1']; ?></option>
+                <option value="" disabled>Elije el empaque 1</option>
+                <?php
+		          while($row5 = mysqli_fetch_array($obtener_empaques0)):
+                ?>
+                <option value="<?php echo $row5['id_empaque']; ?>"><?php echo $row5['nombre']; ?></option>
+                <?php
+                  endwhile;
+                ?>
+            </select>
+    </div>
+   <div class="col m6 s12">
+        <label>Selecciona empaque 2</label>
+            <select class="browser-default" id="empaque2" name="empaque2" required>
+                <option value="<?php echo $menu['id_empaque2']; ?>" selected><?php echo $menu['empaq2']; ?></option>
+                <option value="" disabled >Elije el empaque 2</option>
+                <?php
+		          while($row6 = mysqli_fetch_array($obtener_empaques1)):
+                ?>
+                <option value="<?php echo $row6['id_empaque']; ?>"><?php echo $row6['nombre']; ?></option>
+                <?php
+                  endwhile;
+                ?>
+            </select>
+    </div>
+    </div>
 </form>
     <br/>
     <br/>

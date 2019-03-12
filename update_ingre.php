@@ -2,12 +2,7 @@
     require('header.php');
     require('conexion.php');
 
-    $ningrediente = $_POST['nombre_ingrediente'];
-    $cingrediente = $_POST['codigo'];
-    $caningrediente = $_POST['cantidad'];
-    $uingrediente = $_POST['unidad'];
-    $pingrediente = $_POST['ppresentacion'];
-    $puingrediente = $_POST['punitario'];
+    $nombre=$_POST['nombreproveedor'];
     $id = $_POST['id'];
     
     

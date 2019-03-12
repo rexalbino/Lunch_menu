@@ -9,7 +9,7 @@
     $get_dato_platillo = mysqli_query($link,$sql_platillo);
     $platillo = mysqli_fetch_assoc($get_dato_platillo);
 
-    $sql_ingredientes="SELECT unidad.des_unidad, ingredientes.codigo, ingredientes.cantidad, ingredientes.nombre_ingrediente,`id_relacion`,`peso_bruto` FROM `platillo_ingrediente` INNER JOIN ingredientes ON ingredientes.id_ingredientes = id_ingrediente INNER JOIN unidad ON unidad.id_unidad = ingredientes.id_unidad WHERE id_platillo = '$id' ";
+    $sql_ingredientes="SELECT unidad.des_unidad,`peso_neto`, ingredientes.codigo, ingredientes.cantidad, ingredientes.nombre_ingrediente,`id_relacion`,`peso_bruto` FROM `platillo_ingrediente` INNER JOIN ingredientes ON ingredientes.id_ingredientes = id_ingrediente INNER JOIN unidad ON unidad.id_unidad = ingredientes.id_unidad WHERE id_platillo = '$id' ";
     $resultado = mysqli_query($link,$sql_ingredientes) or die(mysqli_error($link));
 ?>
 <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
@@ -28,7 +28,7 @@
               <th><?php echo $platillo['porciones']; ?></th> <!-- Atraccion segun el id de la tabla platillo -->
               <th>Tiempo de preparacion</th>
               <th><?php echo $platillo['tiempo_preparacion']." Minutos "; ?></th> <!-- Atraccion segun el id de la tabla platillo -->
-              <th>No. Revicion</th>
+              <th>No. Revisi&oacute;n</th>
               <th>000</th>
           </tr>
         </thead>
@@ -52,7 +52,7 @@
 			?>
           <tr><!-- dentro de un while para traer todo -->
             <td><?php echo $row['codigo']; ?></td><!--Toda esta ifnromacion es atraida segun el id de platillo en relacion con el ingrediente -->
-            <td><?php echo $row['cantidad']; ?></td>
+            <td><?php echo round( (FLOAT)$row['peso_neto'],3,PHP_ROUND_HALF_UP); ?></td>
             <td><?php echo $row['des_unidad']; ?></td>
             <td><?php echo $row['nombre_ingrediente']; ?></td>
           </tr>

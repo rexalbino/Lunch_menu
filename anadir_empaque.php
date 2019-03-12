@@ -3,10 +3,14 @@
     require('conexion.php');
     require('header.php');
 
-    $nombre=$_POST['nombreingrediente'];
-    $entrada=$_POST['entrada'];
-    $fuerte=$_POST['fuerte'];
-    $guar1=$_POST['guarnicion1'];
+    $nombre=$_POST['nombreempque'];
+    $codigo=$_POST['codigo'];
+    $capacidad=$_POST['capacidad'];
+    $unidad=$_POST['unidad'];
+    $cantidad=$_POST['cantidad'];
+    $presentacion=$_POST['ppresentacion'];
+    $preciounitario=$_POST['punitario'];
+    $proveedor=$_POST['proveedor'];
     
     
     if (strlen($_POST['notas'])>='1'){
@@ -14,24 +18,18 @@
     }else{
         $nota='N/A';
     }
-    /*if($_POST['guarnicion2']=='0'){
-        $guar2=NULL;
-    }else{*/
-        $guar2=$_POST['guarnicion2'];
-        $empaque1=$_POST['empaque1'];
-        $empaque2=$_POST['empaque2'];
     
 
-    echo "Estoy sosteniendo ".$nombre." , ".$entrada." , ".$fuerte." , ".$guar1." , ".$guar2." , ".$empaque1." , ".$empaque2." , ".$nota;
+    echo "Estoy sosteniendo ".$nombre." , ".$codigo." , ".$capacidad." , ".$unidad." , ".$cantidad." , ".$preciounitario;
     
-    $sql="INSERT INTO `menus` (`id_menu`, `nombre_menu`, `id_entrada`, `id_plato_fuerte`, `id_guarnicion_1`, `id_guarnicion_2`,`id_empaque1`,`id_empaque2`, `nota`) VALUES (NULL, '$nombre', '$entrada', '$fuerte', '$guar1', '$guar2', '$empaque1', '$empaque2', '$nota');";
+    $sql="INSERT INTO `enpaque` (`id_empaque`, `codigo`, `nombre`, `capacidad`, `id_unidad`, `precio_presentacion`, `cantidad_presentacion`, `precio_unitario`, `id_proveedor`, `descripcion`) VALUES (NULL, '$codigo', '$nombre', '$capacidad', '$unidad', '$presentacion', '$cantidad', '$preciounitario', '$proveedor', '$nota');";
     if(mysqli_query($link,$sql)){
         echo "Introducido";
         //header("Location: anadir_ingredientes.php?id=$id_platillo");
         
         ?>
     <script type="text/javascript">
-            //window.location="menus.php";
+            window.location="empaques.php";
         </script>
     <?php
         

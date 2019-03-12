@@ -8,6 +8,10 @@
     $obtener_platillos3 = mysqli_query($link,$sql);
     $obtener_platillos4 = mysqli_query($link,$sql);
 
+    $sql_empaques="SELECT `id_empaque`,`nombre` FROM `enpaque` ";
+    $obtener_empaques0= mysqli_query($link,$sql_empaques);
+    $obtener_empaques1= mysqli_query($link,$sql_empaques);
+
 ?>
 <div class="container">
 <div class="row">
@@ -52,7 +56,7 @@
     </div>
     <div class="col m6 s12">
         <label>Selecciona guarnicion 1</label>
-            <select class="browser-default" id="guarnicion1" name="guarnicion1" re>
+            <select class="browser-default" id="guarnicion1" name="guarnicion1" required>
                 <option value="" disabled selected>Elije un platillo</option>
                 <?php
 		          while($row3 = mysqli_fetch_array($obtener_platillos3)):
@@ -81,9 +85,40 @@
           <textarea id="notas" name="notas" class="materialize-textarea" data-length="250"></textarea>
           <label for="textarea1">Notas</label>
 </div>
+
+    <div class="col m6 s12">
+        <label>Selecciona empaque 1</label>
+            <select class="browser-default" id="empaque1" name="empaque1" required>
+                <option value="" disabled selected>Elije el empaque 1</option>
+                <?php
+		          while($row5 = mysqli_fetch_array($obtener_empaques0)):
+                ?>
+                <option value="<?php echo $row5['id_empaque']; ?>"><?php echo $row5['nombre']; ?></option>
+                <?php
+                  endwhile;
+                ?>
+            </select>
+    </div>
+   <div class="col m6 s12">
+        <label>Selecciona empaque 2</label>
+            <select class="browser-default" id="empaque2" name="empaque2" required>
+                <option value="" disabled selected>Elije el empaque 2</option>
+                <?php
+		          while($row6 = mysqli_fetch_array($obtener_empaques1)):
+                ?>
+                <option value="<?php echo $row6['id_empaque']; ?>"><?php echo $row6['nombre']; ?></option>
+                <?php
+                  endwhile;
+                ?>
+            </select>
+    </div>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
 </form>
-    <br/>
-    <br/>
+    
     <br/>
     <div class="container center-align">
     <div class="row">

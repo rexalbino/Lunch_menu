@@ -38,15 +38,14 @@
     <div class="col s12">
       <ul class="tabs black">
         <li class="tab col s3 white-text"><a href="index.php" target="_self">Platillos</a></li>
-        <li class="tab col s3"><a href="ingredientes.php" target="_self" <?php if(isset($dondeestoy)&$dondeestoy='1'){  ?> class="active"<?php } ?>>Ingredientes</a></li>
-        <li class="tab col s3"><a href="menus.php" target="_self" <?php if(isset($dondeestoy)&$dondeestoy='2'){  ?> class="active"<?php } ?>>Menus</a></li>
+        <li class="tab col s3" <?php if(isset($dondeestoy)){if($dondeestoy='1'){  ?> class="active"<?php }} ?>><a href="ingredientes.php" target="_self"> Ingredientes</a></li>
+        <li class="tab col s3" <?php if(isset($dondeestoy)){if($dondeestoy='2'){  ?> class="active"<?php }} ?>><a href="menus.php" target="_self" >Menus</a></li>
+        <li class="tab col s3" <?php if(isset($dondeestoy)){if($dondeestoy='3'){  ?> class="active"<?php }} ?>><a href="empaques.php" target="_self" >Empaques</a></li>
       </ul>
     </div>
   </div>
   </nav>
         <script>
-        $(document).ready(function(){
-    $('ul.tabs').tabs();
-  });
+  
         
         </script>

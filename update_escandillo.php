@@ -13,10 +13,11 @@
     $id_paxpesos=$_POST['paxpesos'];
     $anterior_neto=$_POST['anteriorneto'];
     $id_relacion_merma=$_POST['id_merma'];
+    $id_costoingrediente=$_POST['costingre'];
 
     echo "Estoy sosteniendo ".$id_ingrediente." , ".$id_platillo." , ".$id_pesobruto." , ".$id_pesoneto." , ".$id_merma." , ".$id_costeunitario." , ".$id_costeneto." , ".$id_paxpesos." , ".$id_relacion;
     
-    $sql="UPDATE `platillo_ingrediente` SET `peso_bruto` = '$id_pesobruto', `peso_neto` = '$id_pesoneto', `merma` = '$id_merma', `coste_unitario` = '$id_costeunitario', `coste_neto` = '$id_costeneto', `pax_pesos` = '$id_paxpesos',`id_tipo_merma` = '$id_relacion_merma' WHERE `platillo_ingrediente`.`id_relacion` = '$id_relacion';";
+    $sql="UPDATE `platillo_ingrediente` SET `peso_bruto` = '$id_pesobruto', `peso_neto` = '$id_pesoneto', `merma` = '$id_merma', `coste_unitario` = '$id_costeunitario', `coste_neto` = '$id_costeneto', `pax_pesos` = '$id_paxpesos',`id_tipo_merma` = '$id_relacion_merma', `coste_ingrediente`=$id_costoingrediente WHERE `platillo_ingrediente`.`id_relacion` = '$id_relacion';";
     if(mysqli_query($link,$sql)){
         echo "Introducido";
         //header("Location: anadir_ingredientes.php?id=$id_platillo");

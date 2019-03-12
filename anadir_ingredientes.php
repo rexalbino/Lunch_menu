@@ -71,21 +71,21 @@ echo "<div class='container center_align'><h3>Estas trbajando con el platillo ".
     <form id="envio_ingre" name="envio_ingre" method="post" action="subir_relacion_plaxingre.php">
 <div class="row">
     <div class="input-field col m3 s6">
-        <input id="bruto" name="bruto" type="number" class="validate" step="any" onkeyup="cant_neto();cost_neto();pax_pesos();" required>
-        <label class="active" for="first_name2">Peso bruto</label>
+        <input id="bruto" name="bruto" type="number" class="validate" step="any" onkeyup="cant_neto();cost_neto();coste_ingediente();pax_pesos();" required>
+        <label class="active" for="first_name2">Cantidad bruto</label>
     </div>
     <div class="col m1 s6">
         <?php if($ingre=="1"){ ?><p><?php echo $nombreingrediente['des_unidad']; $id_ingre=$nombreingrediente['id_unidad']; ?></p><?php } ?>
         
     </div>
     <div class="input-field col m2 s6">
-        <input id="merma" name="merma" type="number" class="validate" onkeyup="cant_neto();cost_neto();pax_pesos();" step="any" required <?php if($ingre=="1"){if($id_ingre=='5'){ echo "value='0' readonly"; }else{}} ?> >
+        <input id="merma" name="merma" type="number" class="validate" onkeyup="cant_neto();cost_neto();" step="any" required <?php if($ingre=="1"){if($id_ingre=='5'){ echo "value='0' readonly"; }else{}} ?> >
         <label class="active" for="first_name2">Merma</label>
         
     </div>
     <div class="col m2 s6">
         <label>Tipo merma</label>
-            <select class="browser-default" id="id_merma" name="id_merma" onchange="cant_neto();cost_neto();pax_pesos();" required>
+            <select class="browser-default" id="id_merma" name="id_merma" onchange="cant_neto();cost_neto();" required>
             <option value="1" selected>Porcentaje</option>
             <option value="2">Peso</option>
             </select>
@@ -99,31 +99,35 @@ echo "<div class='container center_align'><h3>Estas trbajando con el platillo ".
     </div>
 </div>
 <div class="row">
-    <div class="input-field col m4 s6">
+    <div class="input-field col m3 s6">
         <input id="totalbruto" name="totalbruto" type="number" <?php if($ingre=="1"){ ?> value="<?php echo $nombreingrediente['costo_unitario']; ?>"  <?php } ?>class="validate" readonly step="any" required>
         <label class="active" for="first_name2">Coste unitario bruto</label>
     </div>
-    <div class="input-field col m4 s6">
+    <div class="input-field col m3 s6">
         <input id="totalneto" name="totalneto" value="0" type="number" class="validate" step="any" readonly required>
         <label class="active" for="first_name2">Coste total neto</label>
     </div>
-    <div class="input-field col m4 s6">
+    <div class="input-field col m3 s6">
+        <input id="costingre" name="costingre" value="0" type="text" class="validate" onchange="" step="any" readonly required>
+        <label class="active" for="first_name2">Coste ingrediente</label>
+    </div>
+    <div class="input-field col m3 s6">
         <input id="paxpesos" name="paxpesos" value="0" type="text" class="validate" step="any" readonly required>
         <label class="active" for="first_name2">Precio por pax pesos</label>
     </div>
     
 </div>
 <div class="row" style="visibility: hidden;">
-    <div class="col m3 s12" >
+    <div class="col m3 s3" >
             <input type="number" value="<?php echo  $nombredelplatillo['porciones']; ?>" id="porciones" name="porciones" disabled>
         </div>
-    <div class="col m3 s12" >
+    <div class="col m3 s3" >
         <input type="number" id="id_recetaa" name="id_recetaa" value="<?php echo  $nombredelplatillo['id_platillo']; ?>" readonly>
     </div>
-    <div class="col m3 s12" >
+    <div class="col m3 s3" >
         <input type="number" id="id_ingreeee" name="id_ingreee" value="<?php echo  $nombreingrediente['id_ingredientes']; ?>" readonly>
     </div>
-    <div class="col m3 s12" >
+    <div class="col m3 s3" >
         <input type="number" id="id_unidad" name="id_unidad" value="<?php echo  $nombreingrediente['id_unidad']; ?>" readonly>
     </div>
 </div>
@@ -154,6 +158,7 @@ echo "<div class='container center_align'><h3>Estas trbajando con el platillo ".
                     }
                     });
                     });
+          
         </script>
         
         <script>
@@ -203,15 +208,44 @@ echo "<div class='container center_align'><h3>Estas trbajando con el platillo ".
 <script>
         //Función que realiza operacion para coste total neto
             function pax_pesos() {
-                var ingresop1 = document.envio_ingre.totalneto.value;
+                var ingresop1 = document.envio_ingre.costingre.value;
                 var ingresop2 = document.envio_ingre.porciones.value;
-                
+                var ingresop3 = document.envio_ingre.totalbruto.value;
                 
             try{
         //Calculamos el número escrito:
             ingresop1 = (isNaN(parseFloat(ingresop1)))? 0 : parseFloat(ingresop1);
             ingresop2 = (isNaN(parseFloat(ingresop2)))? 0 : parseFloat(ingresop2);
-            document.envio_ingre.paxpesos.value = ingresop1/ingresop2 ;
+            ingresop3 = (isNaN(parseFloat(ingresop3)))? 0 : parseFloat(ingresop3);
+            if(document.envio_ingre.id_unidad.value=='5'){
+                document.envio_ingre.paxpesos.value = ingresop3  ;
+            }else{
+            document.envio_ingre.paxpesos.value = (ingresop1/ingresop2).toFixed(2);
+            }
+            }
+        //Si se produce un error no hacemos nada
+            catch(e) {}
+            }
+</script>
+<script>
+        //Función que realiza operacion para coste del ingrediente
+            function coste_ingediente() {
+                var ingresoing1 = document.envio_ingre.bruto.value;
+                var ingresoing2 = document.envio_ingre.totalneto.value;
+                var ingresoing3 = document.envio_ingre.totalbruto.value;
+                
+                
+            try{
+        //Calculamos el número escrito:
+            ingresop1 = (isNaN(parseFloat(ingresoing1)))? 0 : parseFloat(ingresoing1);
+            ingresop2 = (isNaN(parseFloat(ingresoing2)))? 0 : parseFloat(ingresoing2);
+            ingresop3 = (isNaN(parseFloat(ingresoing3)))? 0 : parseFloat(ingresoing3);
+                
+            if(document.envio_ingre.id_unidad.value=='5'){
+                document.envio_ingre.costingre.value = ingresoing3  ;
+            }else{
+                document.envio_ingre.costingre.value = ingresoing1*ingresoing2  ;
+            }
             }
         //Si se produce un error no hacemos nada
             catch(e) {}
