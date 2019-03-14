@@ -98,7 +98,7 @@
                 $costo_empaque2 = mysqli_fetch_assoc($get_costo_empaque2);
                 
                 
-                echo round( (FLOAT) $costo_entrada['sumaneto']+$costo_fuerte['sumaneto']+$costo_guarnicion1['sumaneto']+$costo_guarnicion2['sumaneto']+$costo_empaque1['precio_unitario']+$costo_empaque2['precio_unitario'],3,PHP_ROUND_HALF_UP);
+                echo round( (FLOAT) $costo_entrada['sumapax']+$costo_fuerte['sumapax']+$costo_guarnicion1['sumapax']+$costo_guarnicion2['sumapax']+$costo_empaque1['precio_unitario']+$costo_empaque2['precio_unitario'],3,PHP_ROUND_HALF_UP);
                 
                 
                 ?></td>

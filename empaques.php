@@ -13,7 +13,7 @@ $dondeestoy='3';
 
     $sql="SELECT *,proveedor.des_proveedor,unidad.des_unidad FROM `enpaque` INNER JOIN proveedor ON proveedor.id_proveedor=enpaque.id_proveedor INNER JOIN unidad ON unidad.id_unidad=enpaque.id_unidad WHERE `nombre` NOT LIKE 'Ninguno' ;";
     $resultado_empaque = mysqli_query($link,$sql) or die(mysqli_error($link));
-    $sql_proveedores="SELECT * FROM `proveedor` ";
+    $sql_proveedores="SELECT * FROM `proveedor` WHERE `des_proveedor` NOT LIKE 'Ninguno' ";
     $resultado_proveedores= mysqli_query($link,$sql_proveedores) or die (mysqli_error($link));
 
 

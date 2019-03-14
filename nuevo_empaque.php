@@ -10,7 +10,7 @@
         $sql_unidades=" SELECT * FROM `unidad` ";
         $resultado = mysqli_query($link,$sql_unidades) or die(mysqli_error($link));
       
-        $sql_proveedores=" SELECT * FROM `proveedor`";
+        $sql_proveedores=" SELECT * FROM `proveedor` WHERE `des_proveedor` NOT LIKE 'Ninguno';";
         $resultado_proveedores = mysqli_query($link,$sql_proveedores) or die(mysqli_error($link));
       ?>
     
@@ -59,7 +59,7 @@
     </div>
     <div class="row">
     <div class="input-field col m6 s12 center">
-        <input id="ppresentacion" name="ppresentacion" type="number" class="validate" onKeyUp="Suma()" required>
+        <input id="ppresentacion" name="ppresentacion" type="number" class="validate" onKeyUp="Suma()" step="any" required>
         <label class="active" for="first_name2">Precio de presentacion</label>
     </div>
         

@@ -37,7 +37,7 @@
     </div>
     <div class="row">
     <div class="input-field col m6 s12" disabled>
-        <input id="cantidad" name="cantidad" type="number" class="validate" onKeyUp="Suma()" step="any" disabled>
+        <input id="cantidad" name="cantidad" type="number" class="validate"  step="any" disabled>
         <label class="active" for="first_name2">Pagina</label>
     </div>
     
@@ -52,7 +52,7 @@
     <div class="container center-align">
         <div class="row">
             <div class="col s6">
-                <button class="btn-large waves-effect waves-light" type="submit" name="action" form="ingredientes" value="choose">Subir empaque
+                <button class="btn-large waves-effect waves-light" type="submit" name="action" form="ingredientes" value="choose">Subir proveedor
                     <i class="material-icons right">send</i>
                 </button>
             </div>

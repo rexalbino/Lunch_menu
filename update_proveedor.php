@@ -6,7 +6,7 @@
     $id=$_GET['id'];
     
     
-    $sql="UPDATE `proveedor` SET `des_proveedor` = 'Test 5' WHERE `proveedor`.`id_proveedor` = '$nombre';";
+    $sql="UPDATE `proveedor` SET `des_proveedor` = '$nombre' WHERE `proveedor`.`id_proveedor` = '$id';";
 
     if(mysqli_query($link,$sql)){
         echo "Actualizado";

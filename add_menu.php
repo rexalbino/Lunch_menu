@@ -31,7 +31,7 @@
         
         ?>
     <script type="text/javascript">
-            //window.location="menus.php";
+            window.location="menus.php";
         </script>
     <?php
         

@@ -41,6 +41,23 @@
     $get_costo_empaque2 = mysqli_query($link,$sql_empaque2);
     $costo_empaque2 = mysqli_fetch_assoc($get_costo_empaque2);
 
+    $sql_procionesentrada = "SELECT `porciones` FROM `platillo` WHERE `id_platillo` = '$entrada'; ";
+    $get_porciones_entrada = mysqli_query($link,$sql_procionesentrada);
+    $porciones_entrada = mysqli_fetch_assoc($get_porciones_entrada);
+    
+    $sql_procionesfuerte = "SELECT `porciones` FROM `platillo` WHERE `id_platillo` = '$fuerte'; ";
+    $get_porciones_fuerte = mysqli_query($link,$sql_procionesfuerte);
+    $porciones_fuerte = mysqli_fetch_assoc($get_porciones_fuerte);
+    
+    $sql_procionesguarnicion1 = "SELECT `porciones` FROM `platillo` WHERE `id_platillo` = '$guar1'; ";
+    $get_porciones_guarnicion1 = mysqli_query($link,$sql_procionesguarnicion1);
+    $porciones_guarnicion1 = mysqli_fetch_assoc($get_porciones_guarnicion1);
+    
+    $sql_procionesguarnicion2 = "SELECT `porciones` FROM `platillo` WHERE `id_platillo` = '$guar2'; ";
+    $get_porciones_guarnicion2 = mysqli_query($link,$sql_procionesguarnicion2);
+    $porciones_guarnicion2 = mysqli_fetch_assoc($get_porciones_guarnicion2);
+    
+
     
 ?>
 <div class="container">
@@ -63,44 +80,48 @@
     <div class="row">
         <div class="col m6 s12">
             <hr/>
-            <h3><b>Entrada:</b> <?php echo $menu['entrada']; ?> </h3><br/>
-            <h4><b>Costo neto:</b> <?php echo round($costo_entrada['sumaneto'],3,PHP_ROUND_HALF_UP); ?> </h4><br/>
-            <h4><b>Costo pax:</b> <?php echo round($costo_entrada['sumapax'],3,PHP_ROUND_HALF_UP); ?> </h4>
+            <h6><b>Entrada:</b> <?php echo $menu['entrada']; ?> </h6><br/>
+            <h6><b>Costo neto:</b> <?php echo round($costo_entrada['sumaneto'],3,PHP_ROUND_HALF_UP); ?> </h6><br/>
+            <h6><b>Costo pax:</b> <?php echo round($costo_entrada['sumapax'],3,PHP_ROUND_HALF_UP); ?> </h6>
+            <h6><b>Porciones del calculo :</b> <?php echo $porciones_entrada['porciones']; ?> </h6>
             
         </div>
         
         <div class="col m6 s12">
             <hr/>
-            <h3><b>Platillo fuerte:</b> <?php echo $menu['fuerte']; ?> </h3><br/>
-            <h4><b>Costo neto:</b> <?php echo round($costo_fuerte['sumaneto'],3,PHP_ROUND_HALF_UP); ?> </h4><br/>
-            <h4><b>Costo pax:</b> <?php echo round($costo_fuerte['sumapax'],3,PHP_ROUND_HALF_UP); ?> </h4>
+            <h6><b>Platillo fuerte:</b> <?php echo $menu['fuerte']; ?> </h6><br/>
+            <h6><b>Costo neto:</b> <?php echo round($costo_fuerte['sumaneto'],3,PHP_ROUND_HALF_UP); ?> </h6><br/>
+            <h6><b>Costo pax:</b> <?php echo round($costo_fuerte['sumapax'],3,PHP_ROUND_HALF_UP); ?> </h6>
+            <h6><b>Porciones del calculo :</b> <?php echo $porciones_fuerte['porciones']; ?> </h6>
         </div>
         
         <div class="col m6 s12">
             <hr/>
-            <h3><b>Guarnicion 1:</b> <?php echo $menu['guar1']; ?> </h3><br/>
-            <h4><b>Costo neto:</b> <?php echo round($costo_guarnicion1['sumaneto'],3,PHP_ROUND_HALF_UP); ?> </h4><br/>
-            <h4><b>Costo pax:</b> <?php echo round($costo_guarnicion1['sumapax'],3,PHP_ROUND_HALF_UP); ?> </h4>
+            <h6><b>Guarnicion 1:</b> <?php echo $menu['guar1']; ?> </h6><br/>
+            <h6><b>Costo neto:</b> <?php echo round($costo_guarnicion1['sumaneto'],3,PHP_ROUND_HALF_UP); ?> </h6><br/>
+            <h6><b>Costo pax:</b> <?php echo round($costo_guarnicion1['sumapax'],3,PHP_ROUND_HALF_UP); ?> </h6>
+            <h6><b>Porciones del calculo :</b> <?php echo $porciones_guarnicion1['porciones']; ?> </h6>
         </div>
         
         <div class="col m6 s12">
             <hr/>
-            <h3><b>Guarnicion 2:</b> <?php echo $menu['guar2']; ?> </h3><br/>
-            <h4><b>Costo neto:</b> <?php echo round($costo_guarnicion2['sumaneto'],3,PHP_ROUND_HALF_UP); ?> </h4><br/>
-            <h4><b>Costo pax:</b> <?php echo round($costo_guarnicion2['sumapax'],3,PHP_ROUND_HALF_UP); ?> </h4>
+            <h6><b>Guarnicion 2:</b> <?php echo $menu['guar2']; ?> </h6><br/>
+            <h6><b>Costo neto:</b> <?php echo round($costo_guarnicion2['sumaneto'],3,PHP_ROUND_HALF_UP); ?> </h6><br/>
+            <h6><b>Costo pax:</b> <?php echo round($costo_guarnicion2['sumapax'],3,PHP_ROUND_HALF_UP); ?> </h6>
+            <h6><b>Porciones del calcul :o</b> <?php echo $porciones_guarnicion2['porciones']; ?> </h6>
         </div>
         
     </div>
     <div class="row">
         <div class="col m6 s12">
             <hr/>
-            <h3><b>Empaque 1 :</b> <?php echo $menu['empaq1']; ?> </h3><br/>
-            <h4><b>Costo unitario :</b> <?php echo round($costo_empaque1['precio_unitario'],3,PHP_ROUND_HALF_UP); ?> </h4><br/> 
+            <h6><b>Empaque 1 :</b> <?php echo $menu['empaq1']; ?> </h6><br/>
+            <h6><b>Costo unitario :</b> <?php echo round($costo_empaque1['precio_unitario'],3,PHP_ROUND_HALF_UP); ?> </h6><br/> 
         </div>
         <div class="col m6 s12">
             <hr/>
-            <h3><b>Empaque 2 :</b> <?php echo $menu['empaq2']; ?> </h3><br/>
-            <h4><b>Costo unitario :</b> <?php echo round($costo_empaque2['precio_unitario'],3,PHP_ROUND_HALF_UP); ?> </h4><br/> 
+            <h6><b>Empaque 2 :</b> <?php echo $menu['empaq2']; ?> </h6><br/>
+            <h6><b>Costo unitario :</b> <?php echo round($costo_empaque2['precio_unitario'],3,PHP_ROUND_HALF_UP); ?> </h6><br/> 
         </div>
     </div>
     <div class="container center-align">

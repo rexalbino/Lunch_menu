@@ -4,7 +4,7 @@
     require('header.php'); 
     require('conexion.php');
 
-    $sql_platillos="SELECT `id_platillo`,`nombre_platillo` FROM `platillo` ";
+    $sql_platillos="SELECT `id_platillo`,`nombre_platillo` FROM `platillo` WHERE `nombre_platillo`NOT LIKE 'Ninguno'   ";
     $resultado_platillo = mysqli_query($link,$sql_platillos) or die(mysqli_error($link));
     
     $sql_ingredientes='SELECT `id_ingredientes`,`codigo`,`cantidad`,`nombre_ingrediente`,`costo_presentacion`,`costo_unitario`,unidad.des_unidad FROM `ingredientes` INNER JOIN unidad ON ingredientes.id_unidad = unidad.id_unidad ORDER BY ingredientes.id_ingredientes DESC ';
@@ -34,7 +34,7 @@
         </br>
         </br>
         </br>
-        <table class="responsive-table centered">
+        <table class="responsive-table">
         <thead>
           <tr>
               <th >Nombre de Platillo</th>
